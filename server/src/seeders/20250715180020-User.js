@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt');
 const { CUSTOMER, CREATOR, SALT_ROUNDS } = require('../constants');
 
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users', [
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('Users', [
       {
         firstName: 'buyerfn',
         lastName: 'buyerln',
@@ -21,5 +21,8 @@ module.exports = {
         role: CREATOR,
       },
     ]);
+  },
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete('Users', null, {});
   },
 };
