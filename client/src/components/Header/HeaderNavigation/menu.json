@@ -1,0 +1,79 @@
+[
+  {
+    "title": "Name ideas",
+    "items": [
+      { "title": "Beauty", "url": "http://www.google.com" },
+      { "title": "Consulting", "url": "http://www.google.com" },
+      { "title": "E-Commerce", "url": "http://www.google.com" },
+      { "title": "Fashion & Clothing", "url": "http://www.google.com" },
+      { "title": "Finance", "url": "http://www.google.com" },
+      { "title": "Real Estate", "url": "http://www.google.com" },
+      { "title": "Tech", "url": "http://www.google.com" },
+      {
+        "title": "More Categories",
+        "url": "http://www.google.com",
+        "isLast": true
+      }
+    ]
+  },
+  {
+    "title": "Contests",
+    "items": [
+      { "title": "How it works", "url": "http://www.google.com" },
+      { "title": "Pricing", "url": "http://www.google.com" },
+      { "title": "Agency service", "url": "http://www.google.com" },
+      { "title": "Active contests", "url": "http://www.google.com" },
+      { "title": "Winners", "url": "http://www.google.com" },
+      { "title": "Leaderboard", "url": "http://www.google.com" },
+      {
+        "title": "Become a creative",
+        "url": "http://www.google.com",
+        "isLast": true
+      }
+    ]
+  },
+  {
+    "title": "Our Work",
+    "items": [
+      { "title": "Names", "url": "http://www.google.com" },
+      { "title": "Taglines", "url": "http://www.google.com" },
+      { "title": "Logos", "url": "http://www.google.com" },
+      {
+        "title": "Testimonials",
+        "url": "http://www.google.com",
+        "isLast": true
+      }
+    ]
+  },
+  {
+    "title": "Names For Sale",
+    "items": [
+      { "title": "Popular names", "url": "http://www.google.com" },
+      { "title": "Short names", "url": "http://www.google.com" },
+      { "title": "Intriguing names", "url": "http://www.google.com" },
+      { "title": "Names by category", "url": "http://www.google.com" },
+      { "title": "Visual name search", "url": "http://www.google.com" },
+      {
+        "title": "Sell your domains",
+        "url": "http://www.google.com",
+        "isLast": true
+      }
+    ]
+  },
+  {
+    "title": "Blog",
+    "items": [
+      { "title": "Ultimate naming guide", "url": "http://www.google.com" },
+      {
+        "title": "Poetic devices in business naming",
+        "url": "http://www.google.com"
+      },
+      { "title": "Crowded bar theory", "url": "http://www.google.com" },
+      {
+        "title": "All articles",
+        "url": "http://www.google.com",
+        "isLast": true
+      }
+    ]
+  }
+]

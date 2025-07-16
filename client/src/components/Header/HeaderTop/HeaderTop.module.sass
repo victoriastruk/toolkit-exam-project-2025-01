@@ -1,0 +1,110 @@
+.loginSignnUpHeaders
+    margin-top: 30px
+    display: flex
+    align-items: center
+    justify-content: space-around
+    border: 1px solid #ebebeb
+    margin-bottom: 10px
+    .container
+      display: flex
+      justify-content: space-between
+      align-items: center
+      max-width: 1200px
+      width: 100%
+      .numberContainer
+        text-decoration: none
+        color: inherit
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 0 15px
+        border-right: 1px solid #ebebeb
+        border-left: 1px solid #ebebeb
+        height: 40px
+        @media(max-width: 600px)
+          margin-left: 10px
+        @media(max-width: 360px)
+          padding: 0 5px
+          margin-left: 0
+        .phoneNumber
+          text-decoration: none
+          span
+            color: #337ab7
+            font-size: 14px
+            margin-left: 10px
+            @media(max-width: 360px)
+              
+    .userButtonsContainer
+      align-items: center
+      justify-content: center
+      display: flex
+      border-left: 1px solid #ebebeb
+      height: 40px
+      @media(max-width: 600px)
+        margin-left: 60px
+      @media(max-width: 400px)
+        margin-left: 20px
+      @media(max-width: 320px)
+        margin-left: 0
+
+      .emailIcon
+        padding: 0 15px
+        border-right: 1px solid #ebebeb
+        cursor: pointer
+
+      .userInfo
+        display: flex
+        justify-content: center
+        align-items: center
+        padding: 0 15px
+        border-right: 1px solid #ebebeb
+        position: relative
+        cursor: pointer
+        &:hover ul
+          display: block
+             
+        ul
+          position: absolute
+          top: 100%
+          left: 0
+          border: 1px solid #eee
+          z-index: 500
+          padding: 5px 0
+          list-style: none
+          background: white
+          width: 180px
+          display: none
+
+          li
+            text-align: left
+
+            &:hover
+              background: #dce4ec
+
+            span
+              display: inline-block
+              padding: 5px 15px
+              color: #333
+              font-size: 16px
+
+        img
+          width: 20px
+          height: 20px
+          border-radius: 10px
+
+        span
+          padding: 0
+          margin-left: 5px
+          color: #718888
+          font-weight: 400
+          font-size: 16px
+          border: none
+      .link
+        text-decoration: none
+        span
+          padding: 0 15px
+          text-transform: uppercase
+          color: #718888
+          font-weight: 400
+          font-size: 14px
+          border-right: 1px solid #ebebeb
