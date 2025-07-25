@@ -1,5 +1,6 @@
-import styles from './HeaderNavigation.module.sass';
+import { Link } from 'react-router-dom';
 import CONSTANTS from '../../../constants';
+import styles from './HeaderNavigation.module.sass';
 
 const MenuItem = ({ item }) => {
   return (
@@ -9,7 +10,7 @@ const MenuItem = ({ item }) => {
       <ul>
         {item.items.map(({ title, url, isLast }) => (
           <li key={title} className={isLast ? styles.last : ''}>
-            <a href={url}>{title}</a>
+            <Link to={url}>{title}</Link>
           </li>
         ))}
       </ul>

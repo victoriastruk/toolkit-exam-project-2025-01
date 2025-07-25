@@ -20,6 +20,7 @@ import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatCo
 import Layout from './pages/Layout/Layout';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
+import HowItWorksPage from './pages/HowItWorksPage/HowItWorksPage';
 
 function App() {
   return (
@@ -38,12 +39,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path='/how-it-works' element={<HowItWorksPage />} />
 
           <Route element={<OnlyNotAuthorizedUserRoute />}>
             <Route path='/login' element={<LoginPage />} />
             <Route path='/registration' element={<RegistrationPage />} />
           </Route>
-          
+
           <Route element={<PrivateRoute />}>
             <Route path='/payment' element={<Payment />} />
             <Route path='/startContest' element={<StartContestPage />} />
