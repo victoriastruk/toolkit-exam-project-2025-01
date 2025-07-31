@@ -1,0 +1,116 @@
+.detailsWrapper
+   display: flex
+   align-items: center
+   justify-content: space-between
+   gap: 1.25rem
+   padding: .625rem 
+   position: relative
+     
+.leftDetails
+   position: absolute
+   left: 50%
+   transform: translateX(-50%)
+   display: flex
+   flex-direction: column
+   justify-content: center
+   align-items: center
+   gap: .625rem
+  
+   .title
+      font-weight: 900
+      color: #fff
+      font-size: 1.25rem
+
+   .description
+      color: #fff
+      font-size: .875rem
+      &.mobile
+         display: none
+      &.desktop
+         display: block
+   
+.rightDetails
+   margin-left: auto
+   display: flex
+   align-items: start
+   gap: .625rem
+   p
+      font-size: .875rem
+      color: #fff
+      margin: 0
+      line-height: 35px
+   .mobile
+      display: none
+
+.showNow
+   text-decoration: none
+   color: #fff
+   padding: .5rem .75rem
+   border-radius: 1.25rem
+   border: 1px solid #ffd
+   font-family: "Product Sans", sans-serif
+   font-weight: 900
+   font-size: .875rem
+   transition: background-color .3s ease 
+   &:hover
+      background: #E57937
+   &.mobile
+      display: none
+      text-decoration: underline
+      text-transform: uppercase
+      border: none
+      padding: .3125rem 0
+      font-weight: 900
+     
+.timer
+   display: flex
+   color: #fff
+   gap: .625rem
+   text-align: center
+   .day 
+      h4
+         background: #E57937
+         font-weight: bold
+         margin: 0
+         width: 2.1875rem
+         font-size: 1.25rem
+         line-height: 2.1875rem
+         height: 35px
+         color: #fff
+         text-align: center
+         border-radius: .3125rem
+      span
+         font-size: .625rem
+         color: #fff
+         text-transform: uppercase
+
+@media screen and (max-width: 1440px)
+   .leftDetails
+      position: static
+      transform: none
+      align-items: flex-start
+
+@media screen and (max-width: 768px)
+   .leftDetails
+      position: static
+      transform: none
+      align-items: flex-start
+      .title
+         font-size: 1.125rem
+      .description
+         &.mobile
+            display: block
+         &.desktop
+            display: none
+   .rightDetails
+      flex-direction: column
+      p
+         line-height: 10px
+      .mobile
+         display: block
+      .desktop
+         display: none
+   .showNow
+      display: none
+      &.mobile
+         display: block
