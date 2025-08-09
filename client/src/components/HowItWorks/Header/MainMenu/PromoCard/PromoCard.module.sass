@@ -1,0 +1,49 @@
+.getStarted
+   text-decoration: none
+   background-repeat: no-repeat
+   width: 18.125rem
+   padding: 25px
+   background-size: 110%
+   border-radius: 0 12px 12px 0
+   display: block
+   overflow: hidden
+   transition: box-shadow 0.5s ease
+
+   .imageWrapper
+      border-radius: 10px
+      overflow: hidden
+      transition: transform 0.5s ease
+
+   .image
+      display: block
+      margin: 0 auto
+      transition: transform 0.5s ease
+
+   
+   .title
+      display: flex
+      align-items: center
+      gap: 12px
+      font-weight: 700
+      padding-top: 15px
+      color: #383c46
+      font-family: "Product Sans", sans-serif
+      img
+         transition: transform 0.5s ease
+
+      .arrow
+         transition: transform 0.5s ease
+   .description
+      color: #656565
+      font-size: .875rem
+      padding-top: 5px
+      line-height: 22px
+      margin-bottom: 16px
+      font-family: "Product Sans", sans-serif
+      
+   &:hover
+      .image
+         transform: scale(1.2) rotate(3deg)
+
+      .arrow
+         transform: translateX(5px)

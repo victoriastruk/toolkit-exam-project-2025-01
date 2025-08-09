@@ -39,7 +39,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path='/how-it-works' element={<HowItWorksPage />} />
 
           <Route element={<OnlyNotAuthorizedUserRoute />}>
             <Route path='/login' element={<LoginPage />} />
@@ -82,6 +81,7 @@ function App() {
           </Route>
           <Route path='*' element={<NotFound />} />
         </Route>
+        <Route path='/how-it-works' element={<HowItWorksPage />} />
       </Routes>
       <ChatContainer />
     </Router>

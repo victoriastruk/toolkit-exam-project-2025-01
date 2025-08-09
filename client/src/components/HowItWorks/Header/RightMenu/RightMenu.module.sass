@@ -1,0 +1,214 @@
+.icons
+   display: flex
+   gap:25px
+   align-items: center
+   .searchIcon, .userIcon, .phoneIcon, .heartIcon
+      background-color: #fff
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 20px
+      height: 20px
+      border-radius: 50%
+      cursor: pointer
+      transition: all ease .3s
+
+   .searchIcon 
+      background-image: url(/staticImages/icons/search.svg)
+      background-repeat: no-repeat
+      background-position: center center
+      background-size: 23px auto
+      width: 30px
+      height: 30px
+    
+     
+   .userIcon 
+      background-image: url(/staticImages/icons/user.svg)
+      background-repeat: no-repeat
+      background-position: center center
+   .menuUser
+      position: relative
+      &:hover .dropMenuUser
+         display: block
+      .dropMenuUser
+         position: absolute
+         left: -70px
+         top: 100%
+         z-index: 999
+         display: none
+         min-width: 170px
+         font-size: 1rem
+         color: #212529
+         text-align: left
+         background-color: #fff
+         padding: 8px 0
+         background-clip: padding-box
+         border: 1px solid rgb(0 0 0 / .15)
+         border-radius: 10px
+         box-shadow: 0 0 20px 0 rgb(0 0 0 / .2)
+         .menuItem
+            font-size: 14px
+            cursor: pointer
+            width: 100%
+            font-weight: 400
+            padding: 7px 25px 7px 10px
+            color: #343434
+            display: flex
+            align-items: center
+            
+            a
+               display: flex
+               align-items: center
+               gap: 5px
+               text-decoration: none
+               color: #343434
+               font-size: 14px
+               font-weight: 400
+               .user
+                  opacity: 0.6
+                  background-image: url('/staticImages/icon-account.svg')
+                  background-repeat: no-repeat
+                  background-position: center center
+                  background-size: 18px auto
+                  width: 30px
+                  height: 30px
+                  display: flex
+                  align-items: center
+                  justify-content: center
+            &:hover
+               background-color: #f2f4f9
+               .user
+                  opacity: 1
+                  background-color: #f2f4f9
+               span
+                  color: #637cf7
+      
+         font-weight: 500
+         color: #19184a
+         font-size: .875rem
+         line-height: 40px
+         cursor: pointer
+         transition: all ease .3s
+         &:hover
+            color: #637cf7
+   .phoneIcon 
+      background-image: url(/staticImages/icons/phone.svg)
+      background-repeat: no-repeat
+      background-position: center center  
+      background-size: 20px auto
+   .menuTelephone
+      position: relative
+      &:hover .dropMenuTelephone
+         display: block
+      .dropMenuTelephone
+         position: absolute
+         left: -70px
+         top: 100%
+         z-index: 999
+         display: none
+         min-width: 170px
+         font-size: 1rem
+         color: #212529
+         text-align: left
+         padding: 8px 0
+         background-color: #fff
+         background-clip: padding-box
+         border: 1px solid rgb(0 0 0 / .15)
+         border-radius: 10px
+         box-shadow: 0 0 20px 0 rgb(0 0 0 / .2)
+         .menuItem
+            font-size: 14px
+            cursor: pointer
+            width: 100%
+            font-weight: 400
+            padding: 7px 25px 7px 10px
+            color: #343434
+            display: flex
+            align-items: center
+            
+            a
+               display: flex
+               align-items: center
+               gap: 5px
+               text-decoration: none
+               color: #343434
+               font-size: 14px
+               font-weight: 400
+               .phone
+                  opacity: 0.6
+                  background-image: url('/staticImages/icons/phone.svg')
+                  background-repeat: no-repeat
+                  background-position: center center
+                  background-size: 22px auto
+                  width: 30px
+                  height: 30px
+                  display: flex
+                  align-items: center
+                  justify-content: center
+               .chatIcon
+                  opacity: 0.6
+                  background-image: url('/staticImages/icons/chat-black.svg')
+                  background-repeat: no-repeat
+                  background-position: center center
+                  background-size: 16px auto
+                  width: 30px
+                  height: 30px
+                  display: flex
+                  align-items: center
+                  justify-content: center
+               .emailIcon
+                  opacity: 0.6
+                  background-image: url('/staticImages/icons/email.svg')
+                  background-repeat: no-repeat
+                  background-position: center center
+                  background-size: 16px auto
+                  width: 30px
+                  height: 30px
+                  display: flex
+                  align-items: center
+                  justify-content: center
+               .helpIcon
+                  opacity: 0.6
+                  background-image: url('/staticImages/icons/help.svg')
+                  background-repeat: no-repeat
+                  background-position: center center
+                  background-size: 21px auto
+                  width: 30px
+                  height: 30px
+               
+                  display: flex
+                  align-items: center
+                  justify-content: center
+            &:hover
+               background-color: #f2f4f9
+               .phone, .chatIcon, .emailIcon, .helpIcon
+                  opacity: 1
+                  background-color: #f2f4f9
+               span
+                  color: #637cf7
+      
+         font-weight: 500
+         color: #19184a
+         font-size: .875rem
+         line-height: 40px
+         cursor: pointer
+         transition: all ease .3s
+         &:hover
+            color: #637cf7
+     
+   .heartIcon 
+      background-image: url(/staticImages/icons/heart.svg)
+      background-repeat: no-repeat     
+      background-position: center center
+      background-size: 16px auto
+      width: 30px
+      height: 30px
+      display: flex
+      align-items: center
+      justify-content: center
+
+@media screen and (max-width: 991px) 
+   .icons
+      .searchIcon
+         display: none
+
