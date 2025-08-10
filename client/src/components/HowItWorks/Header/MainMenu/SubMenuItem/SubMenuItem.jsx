@@ -1,9 +1,9 @@
 import styles from './SubMenuItem.module.sass';
 
-const SubMenuItem = ({ href, icon, title, description }) => {
+const SubMenuItem = ({ href, icon, title, description, mobile }) => {
   return (
     <a className={styles.subMenuLink} href={href}>
-      {icon && (
+      {!mobile && icon && (
         <div className={styles.imageWrapper}>
           <img className={styles.image} src={icon} alt={title} />
         </div>

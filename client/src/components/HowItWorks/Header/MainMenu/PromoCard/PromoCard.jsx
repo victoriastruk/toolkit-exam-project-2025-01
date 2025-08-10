@@ -1,15 +1,25 @@
 import styles from './PromoCard.module.sass';
 
-const PromoCard = ({ image, isImg, title, description, backgroundImage }) => {
+const PromoCard = ({
+  image,
+  isImg,
+  title,
+  description,
+  backgroundImage,
+  mobile,
+}) => {
   return (
     <a
       href="#"
       className={styles.getStarted}
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className={styles.imageWrapper}>
-        <img className={styles.image} alt="promo" src={image} />
-      </div>
+      {!mobile && (
+        <div className={styles.imageWrapper}>
+          <img className={styles.image} alt="promo" src={image} />
+        </div>
+      )}
+
       <h4 className={styles.title}>
         {isImg && <img alt="Search Icon" src="/staticImages/search.svg" />}
         {title}

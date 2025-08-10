@@ -1,6 +1,9 @@
 .topCollections
    width: 16.25rem
    white-space: nowrap
+   padding-top: 25px
+   padding-bottom: 25px
+   padding-left: 25px
    .title
       font-family: "Product Sans", sans-serif
       font-weight: 700
@@ -14,8 +17,7 @@
          flex-direction: row
          flex-wrap: wrap
          max-height: 300px
-         padding: 25px 0px 0px 15px
-        
+      
          li
             width: 50%
       &_Link
@@ -41,3 +43,12 @@
    padding: 0 8px
    margin-left: 5px
    font-size: 13px
+
+@media screen and (max-width: 991px) 
+   .topCollections
+      padding-left: 0
+      .listDomain
+         &.twoColumns
+            flex-direction: column
+            padding: 0
+  

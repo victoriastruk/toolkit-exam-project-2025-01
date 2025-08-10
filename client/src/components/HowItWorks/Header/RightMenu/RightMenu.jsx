@@ -1,6 +1,18 @@
+import { useState, useEffect } from 'react';
+import MainMenu from '../MainMenu/MainMenu';
 import styles from './RightMenu.module.sass';
 
 const RightMenu = ({ showSearch, setShowSearch }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isMobileMenuOpen]);
+
   return (
     <>
       <ul className={styles.icons}>
@@ -66,7 +78,41 @@ const RightMenu = ({ showSearch, setShowSearch }) => {
             <div className={styles.heartIcon}></div>
           </a>
         </li>
+        <div
+          className={`${styles.menuMobileIcon} ${
+            isMobileMenuOpen ? styles.open : ''
+          }`}
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </ul>
+
+      <div
+        className={`${styles.mobileMenu} ${
+          isMobileMenuOpen ? styles.show : ''
+        }`}
+      >
+        <ul>
+          <li>
+            <div className={styles.searchWrapper}>
+              <div className={styles.icon}></div>
+              <input
+                type="text"
+                placeholder="Search Over 300,000+ Premium Names"
+              />
+              <button className={styles.searchBtn}>
+                <span></span>
+              </button>
+            </div>
+          </li>
+          <li>
+            <MainMenu mobile={true} />
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
