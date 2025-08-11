@@ -10,6 +10,7 @@ import FormInput from '../FormInput/FormInput';
 import SelectInput from '../SelectInput/SelectInput';
 import FieldFileInput from '../InputComponents/FieldFileInput/FieldFileInput';
 import FormTextArea from '../InputComponents/FormTextArea/FormTextArea';
+import ButtonGroup from '../ButtonGroup/ButtonGroup';
 import TryAgain from '../TryAgain/TryAgain';
 import Schems from '../../utils/validators/validationSchems';
 import OptionalSelects from '../OptionalSelects/OptionalSelects';
@@ -92,6 +93,7 @@ class ContestForm extends React.Component {
         <div className={styles.formContainer}>
           <Formik
             initialValues={{
+              matchingDomain: 'yes_variation',
               title: '',
               industry: '',
               focusOfWork: '',
