@@ -29,6 +29,24 @@ const variableOptions = {
   },
 };
 
+const optionsButton = [
+  {
+    value: 'yes_variation',
+    label: 'Yes',
+    description: 'But minor variations are allowed',
+    recommended: true,
+  },
+  {
+    value: 'yes_exact',
+    label: 'Yes',
+    description: 'The Domain should exactly match the name',
+  },
+  {
+    value: 'no',
+    label: 'No',
+    description: 'I am only looking for a name, not a Domain',
+  },
+];
 class ContestForm extends React.Component {
   getPreference = () => {
     const { contestType } = this.props;
@@ -144,6 +162,11 @@ class ContestForm extends React.Component {
                   }}
                 />
               </div>
+              <ButtonGroup
+                name="matchingDomain"
+                question="Do you want a matching domain (.com URL) with your name?"
+                options={optionsButton}
+              />
               <OptionalSelects {...this.props} />
               <FieldFileInput
                 name='file'
