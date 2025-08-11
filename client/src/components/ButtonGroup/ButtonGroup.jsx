@@ -1,30 +1,24 @@
-import { Field } from 'formik';
+import ButtonOption from './ButtonOption';
+
 import styles from './ButtonGroup.module.sass';
 
 const ButtonGroup = ({ name, question, options }) => {
   return (
-    <div className={styles.groupWrapper}>
+    <>
       <p className={styles.question}>{question}</p>
       <div className={styles.groupValues}>
-        {options.map((opt, idx) => (
-          <label key={idx}>
-            <Field
-              type="radio"
-              name={name}
-              value={opt.value}
-              className={styles.hiddenInput}
-            />
-            <div className={styles.briefBox}>
-              <strong>{opt.label}</strong>
-              <p>{opt.description}</p>
-              {opt.recommended && (
-                <div className={styles.recommended}>Recommended</div>
-              )}
-            </div>
-          </label>
+        {options.map(({ value, label, description, recommended }) => (
+          <ButtonOption
+            key={value}
+            name={name}
+            value={value}
+            label={label}
+            description={description}
+            recommended={recommended}
+          />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
