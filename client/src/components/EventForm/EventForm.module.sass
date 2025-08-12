@@ -1,0 +1,82 @@
+.formContainer
+  width: 1200px
+  margin: 0 auto
+  margin-top: 50px
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  @media(max-width: 1400px)
+    width: auto
+  @media(max-width: 1000px)
+    flex-direction: column
+
+.errorContainer
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  align-items: center
+  padding: 20px
+  width: 280px
+  margin: 0 auto
+
+  .message
+    font-size: 18px
+    color: red
+
+  .try
+    font-size: 18px
+    color: #333
+
+
+.componentInputContainer
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-start
+
+.warning
+  font-size: 18px
+  display: flex
+  justify-content: center
+  align-items: center
+  border: 2px solid #b72522
+  border-radius: 4px
+  padding: 3px 20px
+  color: #333
+
+
+.input
+  width: 550px
+  height: 46px
+  box-sizing: border-box
+  box-shadow: none
+  display: flex
+  align-items: center
+  font-size: 18px
+  background-color: white
+  border: 2px solid #d0d0d0
+  border-radius: 4px
+  cursor: text
+  margin-bottom: 15px
+  outline: none
+  padding: 0 10px
+  color: #555
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+  @media(max-width: 700px)
+    width: auto
+
+  &:focus
+    border: 2px solid #28d2d0
+
+.inputContainer
+  margin: 15px 0 0 0
+  width: 100%
+
+  .inputHeader
+    display: inline-block
+    font-size: 19px
+    color: #585859
+    font-weight: 700
+    margin-top: 12px
+    margin-bottom: 5px
+

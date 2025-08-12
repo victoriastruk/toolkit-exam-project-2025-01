@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import styles from './HeaderTop.module.sass';
 import CONSTANTS from '../../../constants';
 
-export default function UserMenu({ userData, onLogout }) {
+export default function UserMenu({ userData, onLogout}) {
+   const badgeCount = useSelector((state) => state.events.badgeCount);
   return (
     <>
       <div className={styles.userInfo}>
@@ -44,12 +46,13 @@ export default function UserMenu({ userData, onLogout }) {
         </ul>
       </div>
       
-      <Link to="/events">
+      <Link to="/events" className={styles.linkEvent}>
         <img
           src={`${CONSTANTS.STATIC_IMAGES_PATH}events.png`}
           className={styles.eventsIcon}
           alt="events"
         />
+         {badgeCount > 0 && <span className={styles.bage}>{badgeCount}</span>}
        </Link>
 
         <img
