@@ -43,11 +43,21 @@ export default function UserMenu({ userData, onLogout }) {
           </li>
         </ul>
       </div>
-      <img
-        src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`}
-        className={styles.emailIcon}
-        alt="email"
-      />
+      
+      <Link to="/events">
+        <img
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}events.png`}
+          className={styles.eventsIcon}
+          alt="events"
+        />
+       </Link>
+
+        <img
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}email.png`}
+          className={styles.emailIcon}
+          alt="email"
+        />
+   
     </>
   );
 }
