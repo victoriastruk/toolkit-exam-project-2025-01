@@ -1,35 +1,24 @@
-import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteEvent } from '../../store/slices/eventsSlice';
+import EventTimer from '../EventTimer/EventTimer';
+import CONSTANTS from '../../constants';
+
+import styles from './EventList.module.sass';
 
 const EventList = () => {
   const dispatch = useDispatch();
   const { events, isFetching } = useSelector((state) => state.events);
-  const [now, setNow] = useState(new Date());
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(new Date());
-    }, 1000);
+  const getProgressPercent = (event) => {
+    const now = Date.now();
+    const eventTimeMs = new Date(`${event.date}T${event.time}`).getTime();
+    const createdAtMs = event.id;
 
-    return () => clearInterval(interval);
-  }, []);
+    const totalMs = Math.max(1, eventTimeMs - createdAtMs);
+    const elapsedMs = now - createdAtMs;
 
-  const handleDeleteEvent = (id) => {
-    dispatch(deleteEvent(id));
-  };
-
-  const formatRemainingTime = (event) => {
-    const eventTime = new Date(`${event.date}T${event.time}`);
-    const diffMs = eventTime - now;
-
-    if (diffMs <= 0) return `Time's up!`;
-
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
-
-    return `${hours}h ${minutes}m ${seconds}s`;
+    const percent = 100 - (elapsedMs / totalMs) * 100;
+    return Math.max(0, Math.min(100, percent));
   };
 
   if (isFetching) {
@@ -39,21 +28,30 @@ const EventList = () => {
   if (events.length === 0) {
     return <p>No events</p>;
   }
+  const handleDeleteEvent = (id) => {
+    dispatch(deleteEvent(id));
+  };
   return (
-    <div>
-      <h2>Live upcomming checks</h2>
-      <ul>
+    <div className={styles.timersWrapper}>
+      <div className={styles.title}>
+        <h2>Live upcomming checks</h2>
+        <p>
+          Remaining time{' '}
+          <img
+            className={styles.img}
+            alt="timer"
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}timer.png`}
+          />
+        </p>
+      </div>
+      <ul className={styles.timerList}>
         {events.map((event) => (
-          <li key={event.id}>
-            <div>
-              <p>{event.name}</p>
-              <p>
-                {event.date} {event.time}
-              </p>
-              <p>{formatRemainingTime(event)}</p>
-            </div>
-            <button onClick={() => handleDeleteEvent(event.id)}>Delete</button>
-          </li>
+          <EventTimer
+            key={event.id}
+            event={event}
+            onDelete={handleDeleteEvent}
+            getProgressPercent={getProgressPercent}
+          />
         ))}
       </ul>
     </div>

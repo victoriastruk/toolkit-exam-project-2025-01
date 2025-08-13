@@ -18,7 +18,6 @@ const EventForm = () => {
     notifyBefore: '',
   };
 
-
   const handleSubmit = (values, { resetForm }) => {
     const newEvent = {
       id: Date.now(),
@@ -31,7 +30,7 @@ const EventForm = () => {
 
     resetForm();
   };
-  
+
   return (
     <div className={styles.formContainer}>
       <Formik
@@ -92,7 +91,11 @@ const EventForm = () => {
                 }}
               />
             </div>
-            <button type="submit" disabled={isSubmitting}>
+            <button
+              className={styles.addBtn}
+              type="submit"
+              disabled={isSubmitting}
+            >
               Add event
             </button>
           </Form>

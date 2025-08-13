@@ -42,10 +42,11 @@ const EventsPage = () => {
   }, [events, dispatch]);
 
   return (
-    <div className={styles.container}>
-      <EventForm />
-      <EventList />
-    </div>
+      <div className={styles.container}>
+      <h1 className={styles.title}>Events</h1>
+        <EventForm />
+        <EventList />
+      </div>
   );
 };
 
