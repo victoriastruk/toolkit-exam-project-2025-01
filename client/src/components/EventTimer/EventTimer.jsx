@@ -4,41 +4,37 @@ import styles from './EventTimer.module.sass';
 const EventTimer = ({ event, onDelete, getProgressPercent }) => {
   const [remainingTime, setRemainingTime] = useState('');
 
-  const formatRemainingTime = () => {
-    const now = Date.now();
-    const eventTimeMs = new Date(`${event.date}T${event.time}`).getTime();
-    const diffMs = eventTimeMs - now;
-
+  const calculateRemainingTime = () => {
+    const diffMs =
+      new Date(`${event.date}T${event.time}`).getTime() - Date.now();
     if (diffMs <= 0) return "Time's up!";
 
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diffMs % (1000 * 60)) / 1000);
+    const hours = Math.floor(diffMs / 3600000);
+    const minutes = Math.floor((diffMs % 3600000) / 60000);
+    const seconds = Math.floor((diffMs % 60000) / 1000);
 
-    let parts = [];
-    if (hours > 0) parts.push(`${hours}h`);
-    if (minutes > 0) parts.push(`${minutes}m`);
-    parts.push(`${seconds}s`);
-
-    return parts.join(' ');
+    return [
+      hours > 0 ? `${hours}h` : null,
+      minutes > 0 ? `${minutes}m` : null,
+      `${seconds}s`,
+    ]
+      .filter(Boolean)
+      .join(' ');
   };
 
   useEffect(() => {
-    setRemainingTime(formatRemainingTime());
-    const interval = setInterval(() => {
-      setRemainingTime(formatRemainingTime());
-    }, 1000);
-
+    setRemainingTime(calculateRemainingTime());
+    const interval = setInterval(
+      () => setRemainingTime(calculateRemainingTime()),
+      1000
+    );
     return () => clearInterval(interval);
   }, [event]);
 
   return (
     <li
-      key={event.id}
       className={styles.timerItem}
-      style={{
-        backgroundSize: `${getProgressPercent(event)}% 100%`,
-      }}
+      style={{ backgroundSize: `${getProgressPercent(event)}% 100%` }}
     >
       <div className={styles.info}>
         <p className={styles.name}>{event.name}</p>

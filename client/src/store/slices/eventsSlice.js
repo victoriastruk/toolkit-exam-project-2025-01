@@ -1,55 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 import orderBy from 'lodash/orderBy';
+import { loadEvents, saveEvents } from '../../utils/storage';
+import {
+  decorateAsyncThunk,
+  pendingReducer,
+  fulfilledReducer,
+  rejectedReducer,
+  createExtraReducers,
+} from '../../utils/store';
 
-const loadEvents = () => {
-  try {
-    const stored = localStorage.getItem('events');
-    return stored ? JSON.parse(stored) : [];
-  } catch (e) {
-    console.error('Failed to load events from localStorage', e);
-    return [];
-  }
-};
 const sortEvents = (events) =>
   orderBy(events, (e) => `${e.date}T${e.time}`, ['asc']);
 const calculateBadgeCount = (events) => events.filter((e) => e.notified).length;
+
 const initialEvents = sortEvents(loadEvents());
 const initialState = {
   events: initialEvents,
   badgeCount: calculateBadgeCount(initialEvents),
   isFetching: false,
+  error: null,
 };
 
-const saveEvents = (events) => {
-  localStorage.setItem('events', JSON.stringify(events));
-};
-
-
+export const fetchEvents = decorateAsyncThunk({
+  key: 'events/getEvents',
+  thunk: async () => {
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    return loadEvents();
+  },
+});
 
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    //  fetchEventsStart: (state) => {
-    //    state.isFetching = true;
-    //  },
-    //  fetchEventsSuccess: (state, { payload }) => {
-    //    state.events = sortEvents(payload);
-    //    state.badgeCount = calculateBadgeCount(state.events);
-    //    state.isFetching = false;
-    //    saveEvents(state.events);
-    //  },
-    //  fetchEventsFailure: (state) => {
-    //    state.isFetching = false;
-    //  },
     addEvent: (state, { payload }) => {
       state.events.push(payload);
       state.events = sortEvents(state.events);
-      state.badgeCount = calculateBadgeCount(state.events);
-      saveEvents(state.events);
-    },
-    setEvents: (state, { payload }) => {
-      state.events = sortEvents(payload);
       state.badgeCount = calculateBadgeCount(state.events);
       saveEvents(state.events);
     },
@@ -66,10 +52,21 @@ const eventsSlice = createSlice({
       saveEvents(state.events);
     },
   },
+  extraReducers: createExtraReducers({
+    thunk: fetchEvents,
+    pendingReducer,
+    fulfilledReducer: (state, action) => {
+      state.events = sortEvents(action.payload);
+      state.badgeCount = calculateBadgeCount(action.payload);
+      saveEvents(action.payload);
+      state.isFetching = false;
+    },
+    rejectedReducer,
+  }),
 });
 
 const { actions, reducer } = eventsSlice;
 
-export const { addEvent, setEvents, updateEvent, deleteEvent } = actions;
+export const { addEvent, updateEvent, deleteEvent } = actions;
 
 export default reducer;
