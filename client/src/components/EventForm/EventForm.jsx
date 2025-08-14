@@ -40,6 +40,7 @@ const EventForm = () => {
       >
         {({ isSubmitting }) => (
           <Form>
+            <h1 className={styles.title}>Create new event</h1>
             <div className={styles.inputContainer}>
               <span className={styles.inputHeader}>Event name</span>
               <FormInput

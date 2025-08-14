@@ -8,7 +8,6 @@ const EventsPage = () => {
   useEventNotifications();
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Events</h1>
       <EventForm />
       <EventList />
     </div>

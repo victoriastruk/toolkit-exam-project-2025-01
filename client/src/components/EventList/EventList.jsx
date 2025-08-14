@@ -27,7 +27,7 @@ const EventList = () => {
       ) : error ? (
         <p>Error: {error.data}</p>
       ) : events.length === 0 ? (
-        <p>No events</p>
+        <p className={styles.noEvents}>No events</p>
       ) : (
         <>
           <div className={styles.title}>
