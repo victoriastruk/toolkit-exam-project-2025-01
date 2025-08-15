@@ -31,4 +31,5 @@ module.exports = {
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
   LOG_FILE_PATH: path.join(__dirname, 'logs', 'errors.log'),
+  BACKUP_DIR_PATH: path.join(__dirname, 'backup'),
 };
