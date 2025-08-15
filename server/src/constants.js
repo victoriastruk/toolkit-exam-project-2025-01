@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   JWT_SECRET: 'asdasdasd4as5d4as8d7a8sd4as65d4a8sd7asd4as56d4',
   ACCESS_TOKEN_TIME: 60 * 60,
@@ -28,4 +30,5 @@ module.exports = {
   NOTIFICATION_CHANGE_OFFER_STATUS: 'changeOfferStatus',
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
+  LOG_FILE_PATH: path.join(__dirname, 'logs', 'errors.log'),
 };
