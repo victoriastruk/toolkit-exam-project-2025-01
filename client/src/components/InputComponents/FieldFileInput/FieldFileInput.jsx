@@ -6,7 +6,7 @@ const FieldFileInput = ({ name, classes }) => {
   const { fileUploadContainer, labelClass, fileNameClass, fileInput } = classes;
 
   const handleChange = (e) => {
-    const file = e.currentTraget.files[0];
+    const file = e.currentTarget.files[0];
     setValue(file || null);
   };
 
