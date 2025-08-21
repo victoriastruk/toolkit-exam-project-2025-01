@@ -1,0 +1,105 @@
+.formContainer
+  display: flex
+  flex-direction: row
+  justify-content: center
+  padding: 20px
+  border: 1px solid #455a89
+  border-radius: 8px
+  margin-bottom: 30px
+  
+  @media(max-width: 1400px)
+    width: auto
+  @media(max-width: 1000px)
+    flex-direction: column
+
+.errorContainer
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  align-items: center
+  padding: 20px
+  width: 280px
+  margin: 0 auto
+
+  .message
+    font-size: 18px
+    color: red
+
+  .try
+    font-size: 18px
+    color: #333
+
+
+.componentInputContainer
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: flex-start
+
+.warning
+  font-size: 18px
+  display: flex
+  justify-content: center
+  border-radius: 4px
+  color: #b72522
+
+.title
+  font-size: 28px
+  color: #455a89
+  font-weight: 700
+  margin-top: 12px
+  margin-bottom: 5px
+  text-align: center
+.input
+  width: 450px
+  height: 46px
+  box-sizing: border-box
+  box-shadow: none
+  display: flex
+  align-items: center
+  font-size: 18px
+  background-color: white
+  border: 2px solid #d0d0d0
+  border-radius: 4px
+  cursor: text
+  outline: none
+  padding: 0 10px
+  color: #555
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s
+  @media(max-width: 700px)
+    width: auto
+
+  &:focus
+    border: 2px solid #28d2d0
+
+.inputContainer
+  margin: 5px 0 0 0
+  width: 100%
+
+  .inputHeader
+    display: inline-block
+    font-size: 16px
+    color: #455a89
+    font-weight: 700
+    margin-top: 12px
+    margin-bottom: 5px
+
+.addBtn
+  text-align: center
+  padding: 12px 22px
+  border: 2px solid #28d2d0
+  color: white
+  border-radius: 5px
+  font-size: 14px
+  font-weight: 600
+  margin-bottom: 10px
+  margin-top: 10px
+  text-transform: uppercase
+  background-color: #28d2d0
+  width: 100%
+
+  &:hover
+    color: white
+    color: #28d2d0
+    background: transparent
+    cursor: pointer

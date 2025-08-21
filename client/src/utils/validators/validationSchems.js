@@ -1,6 +1,19 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
 
+const isFutureDateTime = (date, time) => {
+  if (!date || !time) return false;
+
+  const [hours, minutes] = time.split(':').map(Number);
+  const eventDate = new Date(date);
+  eventDate.setHours(hours, minutes, 0, 0);
+
+  return eventDate > new Date();
+};
+
+const todayStart = new Date();
+todayStart.setHours(0, 0, 0, 0);
+
 export default {
   LoginSchem: yup.object().shape({
     email: yup
@@ -224,5 +237,31 @@ export default {
         (value) => value && value.trim().length >= 1,
       )
       .required('required'),
+  }),
+  EventSchema: yup.object({
+    name: yup
+      .string()
+      .min(2, 'Too Short!')
+      .max(80, 'Too Long!')
+      .required('Enter name event'),
+
+    date: yup
+      .date()
+      .min(todayStart, 'Date must be today or in the future')
+      .required('Change date'),
+
+    time: yup
+      .string()
+      .required('Change time')
+      .test('is-future-time', 'Date and time must be in the future', function (time) {
+        const { date } = this.parent;
+        return isFutureDateTime(date, time);
+      }),
+
+    notifyBefore: yup
+      .number()
+      .integer('Must be an integer')
+      .min(1, 'Minimum 1 min')
+      .required('Enter time in minutes'),
   }),
 };

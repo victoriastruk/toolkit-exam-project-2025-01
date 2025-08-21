@@ -20,6 +20,7 @@ import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatCo
 import Layout from './pages/Layout/Layout';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
+import EventsPage from './pages/EventsPage/EventsPage';
 import HowItWorksPage from './pages/HowItWorksPage/HowItWorksPage';
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           </Route>
 
           <Route element={<PrivateRoute />}>
+            <Route path='/events' element={<EventsPage />} />
             <Route path='/payment' element={<Payment />} />
             <Route path='/startContest' element={<StartContestPage />} />
             <Route
