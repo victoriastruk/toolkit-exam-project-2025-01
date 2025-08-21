@@ -164,11 +164,13 @@ class ContestForm extends React.Component {
                   }}
                 />
               </div>
-              <ButtonGroup
-                name="matchingDomain"
-                question="Do you want a matching domain (.com URL) with your name?"
-                options={optionsButton}
-              />
+              {this.props.contestType === CONSTANTS.NAME_CONTEST && (
+                <ButtonGroup
+                  name="matchingDomain"
+                  question="Do you want a matching domain (.com URL) with your name?"
+                  options={optionsButton}
+                />
+              )}
               <OptionalSelects {...this.props} />
               <FieldFileInput
                 name='file'
