@@ -1,0 +1,76 @@
+.question
+   display: inline-block
+   font-size: 19px
+   color: #585859
+   font-weight: 700
+   margin-top: 12px
+   margin-bottom: 15px
+
+.groupValues
+   display: flex
+   flex-wrap: wrap
+   align-items: stretch
+   width: 100%
+   gap: 10px
+   max-width: 800px
+   
+label
+   flex: 1 1 200px
+   display: flex
+   flex-direction: column
+
+
+.hiddenInput
+   position: absolute
+   top: 0
+   left: 0
+   width: 0
+   height: 0
+   visibility: hidden
+   z-index: -1
+   &:checked + .briefBox
+      border: 2px solid #637CF7
+      &::after
+         content: ""
+         display: block
+         background-image: url(/staticImages/icon-check.svg)
+         background-size: 30px auto
+         border-radius: 50%
+         width: 30px
+         height: 30px
+         position: absolute
+         top: 2px
+         right: 2px
+         z-index: 99
+
+.briefBox
+   flex: 1
+   min-width: 200px
+   border: 1px solid rgb(0 0 0 / .08)
+   border-radius: 8px
+   padding: 16px
+   position: relative
+   cursor: pointer
+   strong
+      font-size: 16px
+      font-weight: 700
+
+   p
+      margin-top: 15px
+      color: rgba(25, 24, 74, 0.5)
+      font-size: 14px
+  
+
+.recommended
+   background: #deeafe
+   font-size: 10px
+   font-weight: 700
+   color: #637CF7
+   display: inline-block
+   padding: 5px 8px
+   border-radius: 8px
+   position: absolute
+   top: -10px
+   left: 50%
+   transform: translateX(-50%)
+   z-index: 10

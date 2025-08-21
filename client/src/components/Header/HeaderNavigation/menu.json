@@ -19,7 +19,7 @@
   {
     "title": "Contests",
     "items": [
-      { "title": "How it works", "url": "http://www.google.com" },
+      { "title": "How it works", "url": "/how-it-works" },
       { "title": "Pricing", "url": "http://www.google.com" },
       { "title": "Agency service", "url": "http://www.google.com" },
       { "title": "Active contests", "url": "http://www.google.com" },

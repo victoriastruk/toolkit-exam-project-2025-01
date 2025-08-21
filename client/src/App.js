@@ -21,6 +21,7 @@ import Layout from './pages/Layout/Layout';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
 import EventsPage from './pages/EventsPage/EventsPage';
+import HowItWorksPage from './pages/HowItWorksPage/HowItWorksPage';
 
 function App() {
   return (
@@ -44,7 +45,7 @@ function App() {
             <Route path='/login' element={<LoginPage />} />
             <Route path='/registration' element={<RegistrationPage />} />
           </Route>
-          
+
           <Route element={<PrivateRoute />}>
             <Route path='/events' element={<EventsPage />} />
             <Route path='/payment' element={<Payment />} />
@@ -82,6 +83,7 @@ function App() {
           </Route>
           <Route path='*' element={<NotFound />} />
         </Route>
+        <Route path='/how-it-works' element={<HowItWorksPage />} />
       </Routes>
       <ChatContainer />
     </Router>
