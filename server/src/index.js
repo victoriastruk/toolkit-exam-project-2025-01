@@ -1,10 +1,21 @@
 const http = require('http');
 require('dotenv').config();
+const express = require('express');
+const cors = require('cors');
+const cron = require('node-cron');
+const { dailyBackup } = require('./utils/dailyBackup');
+require('./dbMongo/mongoose');
+const router = require('./router');
 
 const controller = require('./socketInit');
 const app = require('./app');
 
 const PORT = process.env.PORT || 3000;
+
+cron.schedule('0 0 * * *', () => {
+  dailyBackup();
+  console.log('Daily backup executed.');
+});
 
 const server = http.createServer(app);
 server.listen(PORT, () =>
