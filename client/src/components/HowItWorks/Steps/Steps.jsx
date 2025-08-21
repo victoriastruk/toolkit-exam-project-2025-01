@@ -1,9 +1,12 @@
 import styles from './Steps.module.sass';
+import constants from '../../../constants';
+
+const {STATIC_IMAGES_PATH} = constants;
 
 const Steps = () => {
   return (
     <>
-      <img src="/staticImages/icon-27.svg" alt="SVG" className={styles.icon} />
+      <img src={`${STATIC_IMAGES_PATH}icon-27.svg`} alt="SVG" className={styles.icon} />
       <h3 className={styles.title}>How Do Naming Contests Work?</h3>
 
       <ul className={styles.stepsList}>

@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { services, tools, sellers, creatives, atom, legal } from './footerData';
+import constants from '../../../constants';
 import styles from './Footer.module.sass';
+
+const { STATIC_IMAGES_PATH } = constants;
 
 const Footer = () => {
   const [openSections, setOpenSections] = useState({});
@@ -80,27 +83,42 @@ const Footer = () => {
         <ul className={styles.social}>
           <li>
             <a href="#">
-              <img src="/staticImages/facebook.svg" alt="Facebook icon" />
+              <img
+                src={`${STATIC_IMAGES_PATH}facebook.svg`}
+                alt="Facebook icon"
+              />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/staticImages/twitter.svg" alt="Twitter icon" />
+              <img
+                src={`${STATIC_IMAGES_PATH}twitter.svg`}
+                alt="Twitter icon"
+              />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/staticImages/instagram.svg" alt="Instagram icon" />
+              <img
+                src={`${STATIC_IMAGES_PATH}instagram.svg`}
+                alt="Instagram icon"
+              />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/staticImages/linkedin.svg" alt="LinkedIn icon" />
+              <img
+                src={`${STATIC_IMAGES_PATH}linkedin.svg`}
+                alt="LinkedIn icon"
+              />
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="/staticImages/youtube.svg" alt="Youtube icon" />
+              <img
+                src={`${STATIC_IMAGES_PATH}youtube.svg`}
+                alt="Youtube icon"
+              />
             </a>
           </li>
         </ul>

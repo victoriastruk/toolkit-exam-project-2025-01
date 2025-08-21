@@ -1,6 +1,10 @@
+import constants from '../../../../constants';
+
+const { STATIC_IMAGES_PATH } = constants;
+
 export const cardData = [
   {
-    imgSrc: '/staticImages/g1.svg',
+    imgSrc: `${STATIC_IMAGES_PATH}g1.svg`,
     imgAlt: 'lightning',
     title: 'Launch a Contest',
     description:
@@ -8,7 +12,7 @@ export const cardData = [
     buttonText: 'Launch a Contest',
   },
   {
-    imgSrc: '/staticImages/g2.svg',
+    imgSrc: `${STATIC_IMAGES_PATH}g2.svg`,
     imgAlt: 'monitor',
     title: 'Explore Names For Sale',
     description:
@@ -16,7 +20,7 @@ export const cardData = [
     buttonText: 'Explore Names For Sale',
   },
   {
-    imgSrc: '/staticImages/g3.svg',
+    imgSrc: `${STATIC_IMAGES_PATH}g3.svg`,
     imgAlt: 'bulb',
     title: 'Agency-level Managed Contests',
     description:

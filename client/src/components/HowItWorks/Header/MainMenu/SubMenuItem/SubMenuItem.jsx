@@ -1,3 +1,4 @@
+import CONSTANTS from "../../../../../constants"
 import styles from './SubMenuItem.module.sass';
 
 const SubMenuItem = ({ href, icon, title, description, mobile }) => {
@@ -13,7 +14,7 @@ const SubMenuItem = ({ href, icon, title, description, mobile }) => {
           {title}
           <img
             className={styles.arrow}
-            src="https://img.atom.com/public/images/payments/arrow_right_black.svg"
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow_right_black.svg`}
             alt="arrow"
           />
         </div>

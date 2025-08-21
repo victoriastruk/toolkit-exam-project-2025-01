@@ -1,3 +1,4 @@
+import CONSTANTS from '../../../../../constants';
 import styles from './PromoCard.module.sass';
 
 const PromoCard = ({
@@ -21,12 +22,17 @@ const PromoCard = ({
       )}
 
       <h4 className={styles.title}>
-        {isImg && <img alt="Search Icon" src="/staticImages/search.svg" />}
+        {isImg && (
+          <img
+            alt="Search Icon"
+            src={`${CONSTANTS.STATIC_IMAGES_PATH}search.svg`}
+          />
+        )}
         {title}
         <img
           className={styles.arrow}
           alt="arrow"
-          src="https://img.atom.com/public/images/payments/arrow_right_black.svg"
+          src={`${CONSTANTS.STATIC_IMAGES_PATH}arrow_right_black.svg`}
         />
       </h4>
       <p className={styles.description}>{description}</p>

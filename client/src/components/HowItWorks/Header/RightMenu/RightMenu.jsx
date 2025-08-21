@@ -1,16 +1,27 @@
-import { useState, useEffect } from 'react';
-import MainMenu from '../MainMenu/MainMenu';
-import styles from './RightMenu.module.sass';
+import { useState, useEffect } from "react";
+import MainMenuMobile from "../MainMenu/MainMenuMobile/MainMenuMobile";
+import styles from "./RightMenu.module.sass";
 
 const RightMenu = ({ showSearch, setShowSearch }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
+  }, [isMobileMenuOpen]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 991 && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isMobileMenuOpen]);
 
   return (
@@ -78,40 +89,24 @@ const RightMenu = ({ showSearch, setShowSearch }) => {
             <div className={styles.heartIcon}></div>
           </a>
         </li>
-        <div
+        <li
           className={`${styles.menuMobileIcon} ${
-            isMobileMenuOpen ? styles.open : ''
+            isMobileMenuOpen ? styles.open : ""
           }`}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </li>
       </ul>
 
       <div
         className={`${styles.mobileMenu} ${
-          isMobileMenuOpen ? styles.show : ''
+          isMobileMenuOpen ? styles.show : ""
         }`}
       >
-        <ul>
-          <li>
-            <div className={styles.searchWrapper}>
-              <div className={styles.icon}></div>
-              <input
-                type="text"
-                placeholder="Search Over 300,000+ Premium Names"
-              />
-              <button className={styles.searchBtn}>
-                <span></span>
-              </button>
-            </div>
-          </li>
-          <li>
-            <MainMenu mobile={true} />
-          </li>
-        </ul>
+        <MainMenuMobile />
       </div>
     </>
   );
