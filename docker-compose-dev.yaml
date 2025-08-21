@@ -33,14 +33,14 @@ services:
 
 
   mongo-dev:
-    image: mongo:6.0.11
+    image: mongo:8.0.12
     ports:
       - "12345:27017"
 
 
 
   db-dev:
-    image: postgres:15.5-bullseye
+    image: postgres:17.5-bullseye
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres

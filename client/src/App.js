@@ -20,72 +20,74 @@ import ChatContainer from './components/Chat/ChatComponents/ChatContainer/ChatCo
 import Layout from './pages/Layout/Layout';
 import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUserRoute/OnlyNotAuthorizedUserRoute';
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
+import EventsPage from './pages/EventsPage/EventsPage';
+import HowItWorksPage from './pages/HowItWorksPage/HowItWorksPage';
 
-class App extends Component {
-  render () {
-    return (
-      <Router history={browserHistory}>
-        <ToastContainer
-          position='top-center'
-          autoClose={5000}
-          hideProgressBar
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnVisibilityChange
-          draggable
-          pauseOnHover
-        />
-        <Routes>
-          <Route path='/' element={<Layout />}>
-            <Route index element={<Home />} />
+function App() {
+  return (
+    <Router history={browserHistory}>
+      <ToastContainer
+        position='top-center'
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnVisibilityChange
+        draggable
+        pauseOnHover
+      />
+      <Routes>
+        <Route path='/' element={<Layout />}>
+          <Route index element={<Home />} />
 
-            <Route element={<OnlyNotAuthorizedUserRoute />}>
-              <Route path='/login' element={<LoginPage />} />
-              <Route path='/registration' element={<RegistrationPage />} />
-            </Route>
-
-            <Route element={<PrivateRoute />}>
-              <Route path='/payment' element={<Payment />} />
-              <Route path='/startContest' element={<StartContestPage />} />
-              <Route
-                path='/startContest/nameContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.NAME_CONTEST}
-                    title='Company Name'
-                  />
-                }
-              />
-              <Route
-                path='/startContest/taglineContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.TAGLINE_CONTEST}
-                    title='TAGLINE'
-                  />
-                }
-              />
-              <Route
-                path='/startContest/logoContest'
-                element={
-                  <ContestCreationPage
-                    contestType={CONSTANTS.LOGO_CONTEST}
-                    title='LOGO'
-                  />
-                }
-              />
-              <Route path='/dashboard' element={<Dashboard />} />
-              <Route path='/contest/:id' element={<ContestPage />} />
-              <Route path='/account' element={<UserProfile />} />
-            </Route>
-            <Route path='*' element={<NotFound />} />
+          <Route element={<OnlyNotAuthorizedUserRoute />}>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/registration' element={<RegistrationPage />} />
           </Route>
-        </Routes>
-        <ChatContainer />
-      </Router>
-    );
-  }
+
+          <Route element={<PrivateRoute />}>
+            <Route path='/events' element={<EventsPage />} />
+            <Route path='/payment' element={<Payment />} />
+            <Route path='/startContest' element={<StartContestPage />} />
+            <Route
+              path='/startContest/nameContest'
+              element={
+                <ContestCreationPage
+                  contestType={CONSTANTS.NAME_CONTEST}
+                  title='Company Name'
+                />
+              }
+            />
+            <Route
+              path='/startContest/taglineContest'
+              element={
+                <ContestCreationPage
+                  contestType={CONSTANTS.TAGLINE_CONTEST}
+                  title='TAGLINE'
+                />
+              }
+            />
+            <Route
+              path='/startContest/logoContest'
+              element={
+                <ContestCreationPage
+                  contestType={CONSTANTS.LOGO_CONTEST}
+                  title='LOGO'
+                />
+              }
+            />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/contest/:id' element={<ContestPage />} />
+            <Route path='/account' element={<UserProfile />} />
+          </Route>
+          <Route path='*' element={<NotFound />} />
+        </Route>
+        <Route path='/how-it-works' element={<HowItWorksPage />} />
+      </Routes>
+      <ChatContainer />
+    </Router>
+  );
 }
 
 export default App;

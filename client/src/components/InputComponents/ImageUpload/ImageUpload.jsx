@@ -1,43 +1,52 @@
-import React from 'react';
 import classNames from 'classnames';
 import { useField } from 'formik';
+import { useState } from 'react';
 
-const ImageUpload = props => {
-  const [field, meta, helpers] = useField(props.name);
-  const { uploadContainer, inputContainer, imgStyle } = props.classes;
-  const onChange = e => {
-    const node = window.document.getElementById('imagePreview');
-    const file = e.target.files[0];
+const ImageUpload = ({ name, classes }) => {
+  const [field, meta, helpers] = useField(name);
+  const { setValue } = helpers;
+  const [preview, setPreview] = useState(null);
+  const { uploadContainer, inputContainer, imgStyle, fileNameClass } = classes;
+
+  const handleChange = (e) => {
+    const file = e.currentTarget.files[0];
     const imageType = /image.*/;
-    if (!file.type.match(imageType)) {
+
+    if (!file || !file.type.match(imageType)) {
       e.target.value = '';
+      setValue(null);
+      setPreview(null);
     } else {
-      field.onChange(file);
+      setValue(file);
       const reader = new FileReader();
-      reader.onload = () => {
-        node.src = reader.result;
-      };
+      reader.onload = () => setPreview(reader.result);
       reader.readAsDataURL(file);
     }
   };
+  
+  const fileName = field.value?.name || 'No image chosen';
+
   return (
     <div className={uploadContainer}>
       <div className={inputContainer}>
-        <span>Support only images (*.png, *.gif, *.jpeg)</span>
+        <span>Support only images (*.png, *.jpg, *.jpeg)</span>
         <input
-          {...field}
-          id='fileInput'
-          type='file'
-          accept='.jpg, .png, .jpeg'
-          onClick={onChange}
+          name={name}
+          id={name}
+          type="file"
+          accept=".jpg, .png, .jpeg"
+          onChange={handleChange}
         />
-        <label htmlFor='fileInput'>Chose file</label>
+        <label htmlFor={name}>Chose file</label>
+        <p>{fileName}</p>
       </div>
-      <img
-        id='imagePreview'
-        className={classNames({ [imgStyle]: !!field.value })}
-        alt='user'
-      />
+      {preview && (
+        <img
+          src={preview}
+          className={classNames({ [imgStyle]: !!field.value })}
+          alt="user"
+        />
+      )}
     </div>
   );
 };

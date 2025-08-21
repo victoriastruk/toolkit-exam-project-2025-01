@@ -15,7 +15,7 @@ const OptionalSelects = props => {
         <>
           <SelectInput
             name='typeOfName'
-            header='type of company'
+            header='Type of company'
             classes={{
               inputContainer: styles.selectInputContainer,
               inputHeader: styles.selectHeader,

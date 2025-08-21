@@ -1,4 +1,4 @@
-ARG VERSION=lts-alpine
+ARG VERSION=22-alpine
 
 FROM node:$VERSION
 

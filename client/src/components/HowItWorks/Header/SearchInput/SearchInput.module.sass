@@ -1,0 +1,47 @@
+.searchWrapper
+   display: flex
+   align-items: center
+   justify-content: space-between
+   position: relative
+   input
+      border: none
+      outline: 0
+      display: block
+      width: 100%
+      text-align: left
+      padding: 0 50px 0 48px
+      background: #fff
+      font-size: 24px
+      height: 60px
+      line-height: 60px
+      color: #343434
+      font-size: 18px
+      font-family: "Plus Jakarta Sans",sans-serif
+      font-weight: 400
+      &::placeholder 
+         color:#a3a3b7
+
+   .searchBtn
+      background: #ff6955
+      width: 68px
+      height: 54px
+      padding: 0
+      position: absolute
+      top: 5px
+      right: 5px
+      cursor: pointer
+      border: none
+      border-radius: 40px
+      transition: all ease .6s
+      box-shadow: 3px 3px 10px 0 rgb(255 104 85 / .3)
+      &:hover
+         background-color: #ff533c
+      span
+         background-image: url(/staticImages/search-button.svg)
+         width: 21px
+         height: 21px
+         display: inline-block
+         background-position: center
+         background-size: 100%
+         position: relative
+         top: 4px

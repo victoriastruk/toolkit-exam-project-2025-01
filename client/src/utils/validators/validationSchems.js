@@ -1,6 +1,19 @@
 import * as yup from 'yup';
 import valid from 'card-validator';
 
+const isFutureDateTime = (date, time) => {
+  if (!date || !time) return false;
+
+  const [hours, minutes] = time.split(':').map(Number);
+  const eventDate = new Date(date);
+  eventDate.setHours(hours, minutes, 0, 0);
+
+  return eventDate > new Date();
+};
+
+const todayStart = new Date();
+todayStart.setHours(0, 0, 0, 0);
+
 export default {
   LoginSchem: yup.object().shape({
     email: yup
@@ -12,7 +25,7 @@ export default {
       .test(
         'test-password',
         'min 6 symbols',
-        value => value && value.trim().length >= 6
+        (value) => value && value.trim().length >= 6,
       )
       .required('required'),
   }),
@@ -26,7 +39,7 @@ export default {
       .test(
         'test-password',
         'min 6 symbols',
-        value => value && value.trim().length >= 6
+        (value) => value && value.trim().length >= 6,
       )
       .required('required'),
     confirmPassword: yup
@@ -38,7 +51,7 @@ export default {
       .test(
         'test-firstName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('First Name is required'),
     lastName: yup
@@ -46,7 +59,7 @@ export default {
       .test(
         'test-lastName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('Last Name is required'),
     displayName: yup
@@ -54,7 +67,7 @@ export default {
       .test(
         'test-displayName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('Display Name is required'),
     role: yup
@@ -77,7 +90,7 @@ export default {
       .test(
         'test-title',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('title of contest required'),
     industry: yup.string().required('industry required'),
@@ -86,7 +99,7 @@ export default {
       .test(
         'test-focusOfWork',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('focus of work required'),
     targetCustomer: yup
@@ -94,7 +107,7 @@ export default {
       .test(
         'test-targetCustomer',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('target customers required'),
     styleName: yup.string().min(1),
@@ -118,7 +131,7 @@ export default {
       .test(
         'test-offerData',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('suggestion is required'),
   }),
@@ -128,7 +141,7 @@ export default {
       .test(
         'test-cardNumber',
         'Credit Card number is invalid',
-        value => valid.number(value).isValid
+        (value) => valid.number(value).isValid,
       )
       .required('required'),
     name: yup
@@ -137,14 +150,14 @@ export default {
       .required('required'),
     cvc: yup
       .string()
-      .test('test-cvc', 'cvc is invalid', value => valid.cvv(value).isValid)
+      .test('test-cvc', 'cvc is invalid', (value) => valid.cvv(value).isValid)
       .required('required'),
     expiry: yup
       .string()
       .test(
         'test-expiry',
         'expiry is invalid',
-        value => valid.expirationDate(value).isValid
+        (value) => valid.expirationDate(value).isValid,
       )
       .required('required'),
   }),
@@ -158,7 +171,7 @@ export default {
       .test(
         'test-cardNumber',
         'Credit Card number is invalid',
-        value => valid.number(value).isValid
+        (value) => valid.number(value).isValid,
       )
       .required('required'),
     name: yup
@@ -167,14 +180,14 @@ export default {
       .required('required'),
     cvc: yup
       .string()
-      .test('test-cvc', 'cvc is invalid', value => valid.cvv(value).isValid)
+      .test('test-cvc', 'cvc is invalid', (value) => valid.cvv(value).isValid)
       .required('required'),
     expiry: yup
       .string()
       .test(
         'test-expiry',
         'expiry is invalid',
-        value => valid.expirationDate(value).isValid
+        (value) => valid.expirationDate(value).isValid,
       )
       .required('required'),
   }),
@@ -184,7 +197,7 @@ export default {
       .test(
         'test-firstName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('required'),
     lastName: yup
@@ -192,7 +205,7 @@ export default {
       .test(
         'test-lastName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('required'),
     displayName: yup
@@ -200,7 +213,7 @@ export default {
       .test(
         'test-displayName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('required'),
     file: yup.mixed(),
@@ -211,7 +224,7 @@ export default {
       .test(
         'test-message',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('required'),
   }),
@@ -221,8 +234,34 @@ export default {
       .test(
         'test-catalogName',
         'required',
-        value => value && value.trim().length >= 1
+        (value) => value && value.trim().length >= 1,
       )
       .required('required'),
+  }),
+  EventSchema: yup.object({
+    name: yup
+      .string()
+      .min(2, 'Too Short!')
+      .max(80, 'Too Long!')
+      .required('Enter name event'),
+
+    date: yup
+      .date()
+      .min(todayStart, 'Date must be today or in the future')
+      .required('Change date'),
+
+    time: yup
+      .string()
+      .required('Change time')
+      .test('is-future-time', 'Date and time must be in the future', function (time) {
+        const { date } = this.parent;
+        return isFutureDateTime(date, time);
+      }),
+
+    notifyBefore: yup
+      .number()
+      .integer('Must be an integer')
+      .min(1, 'Minimum 1 min')
+      .required('Enter time in minutes'),
   }),
 };

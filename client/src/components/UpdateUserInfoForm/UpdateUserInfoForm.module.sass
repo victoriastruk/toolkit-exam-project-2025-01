@@ -7,16 +7,21 @@
 
   button
     align-self: flex-end
-    background-color: #4e618d
+    background-color: #455a89
     color: white
-    border-radius: 6px
-    padding: 5px 10px
-    font-size: 16px
+    border-radius: 12px
+    padding: 15px 35px
+    font-size: 18px
     font-weight: 500
+    margin-top: 15px
     border: none
+    transition: background-color 0.2s
 
     &:hover
+      transition: background-color 0.2s
       background-color: #f27e51
+      color: white
+      cursor: pointer
 
   .imageUploadContainer
     display: flex
@@ -27,6 +32,7 @@
       width: 120px
       height: 120px
       align-self: center
+      object-fit: cover
 
     .uploadInputContainer
       display: flex
@@ -39,7 +45,8 @@
         font-size: 14px
         margin-bottom: 4px
         color: red
-
+      p
+        margin-top: 10px
       input
         display: none
         border: none
@@ -48,17 +55,18 @@
         background-color: #66afe9
 
       label
-        padding: 5px 10px
+        padding: 15px 35px
         color: white
         background-color: #455a89
-        border-radius: 4px
+        border-radius: 12px
         align-self: flex-start
         cursor: pointer
-
+        transition: background-color 0.2s
         &:hover
           color: white
           background-color: #f27e51
-
+          transition: background-color 0.2s
+    
   .container
     display: flex
     flex-direction: column
