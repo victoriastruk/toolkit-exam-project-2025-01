@@ -1,0 +1,138 @@
+.mainMenu
+   display: flex
+   align-items: center
+   gap: 50px
+   position: relative
+   @media screen and (max-width: 1200px)
+      display: none
+   li
+      padding-bottom: 5px
+      &:hover .subMenu, &:hover .subMenuNamingAndBrand
+         display: flex
+         opacity: 1
+         visibility: visible
+         pointer-events: auto
+
+   .noLink
+      font-family: "Product Sans", sans-serif
+      font-size: .875rem
+      font-weight: 500
+      color: #19184a
+      transition: all ease .3s
+      cursor: pointer
+      line-height: 40px
+      &:hover
+         color: #637cf7
+
+
+
+.subMenu
+   opacity: 0
+   z-index: 1000
+   visibility: hidden
+   position: absolute
+   left: 50%
+   transform: translateX(-50%)
+   top: 100%
+   width: 63.75rem
+   margin: 0
+   background: #fff
+   box-shadow: 0 0 0 1px rgb(18 55 105 / .08),2px 3px 12px rgb(164 172 185 / .24) 
+   border-radius: 12px
+   transition: opacity 0.2s ease, visibility 0.2s ease 
+
+   pointer-events: none
+   transition: opacity 0.2s ease, visibility 0.2s ease
+   .mainLeftLinks
+      display: flex
+      flex-direction: column
+      padding: 25px
+      width: 440px
+      border-right: 1px solid #d0d5dd
+   .domainList
+      padding: 25px
+      width: 350px
+ 
+
+
+.agencyStyle
+   text-decoration: none
+   background-image: url('/staticImages/brand_naming_bg.svg')
+   background-repeat: no-repeat
+   width: 18.125rem
+   padding: 25px
+   background-size: 110%
+   border-radius: 0 12px 12px 0
+   display: block
+   overflow: hidden
+   transition: box-shadow 0.5s ease
+
+   .imageWrapper
+      border-radius: 10px
+      overflow: hidden
+      transition: transform 0.5s ease
+
+   .image
+      display: block
+      margin: 0 auto
+      object-fit: cover
+      transition: transform 0.5s ease
+
+   .title
+      display: flex
+      align-items: center
+      gap: 12px
+      font-weight: 700
+      padding-top: 15px
+      color: #383c46
+      font-family: "Product Sans", sans-serif
+      img
+         transition: transform 0.5s ease
+
+      .arrow
+         transition: transform 0.5s ease
+   .description
+      color: #656565
+      font-size: .875rem
+      padding-top: 5px
+      line-height: 22px
+      margin-bottom: 16px
+      font-family: "Product Sans", sans-serif
+      
+   &:hover
+      .image
+         transform: scale(1.2) rotate(3deg)
+
+      .arrow
+         transform: translateX(5px)
+
+
+.NamingAndBrand
+   width: 790px
+   .mainLeftLinks
+      width: 275px
+      border-right: 1px solid #d0d5dd
+   .brandingContext
+      padding: 25px
+      width: 20rem
+
+.researchAndTesting
+   width: 750px
+   .mainLeftLinks
+      width: 410px
+      border-right: 1px solid #d0d5dd
+   .brandingContext
+      padding: 25px
+      width: 20rem
+
+.trademarks
+   width: 580px
+   .mainLeftLinks
+      width: 320px
+      border-right: 1px solid #d0d5dd
+
+.resources
+   width: 1340px
+   .mainLeftLinks
+      width: 390px
+      border-right: 1px solid #d0d5dd

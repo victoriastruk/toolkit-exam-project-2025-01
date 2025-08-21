@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-export const pendingReducer = state => {
+export const pendingReducer = (state) => {
   state.isFetching = true;
   state.error = null;
 };
 
-export const fulfilledReducer = state => {
+export const fulfilledReducer = (state) => {
   state.isFetching = false;
 };
 
@@ -48,11 +48,8 @@ export const decorateAsyncThunk = ({ key, thunk }) => {
  */
 
 export const createExtraReducers = ({
-  thunk,
-  pendingReducer,
-  fulfilledReducer,
-  rejectedReducer,
-}) => builder => {
+  thunk, pendingReducer, fulfilledReducer, rejectedReducer,
+}) => (builder) => {
   pendingReducer && builder.addCase(thunk.pending, pendingReducer);
   fulfilledReducer && builder.addCase(thunk.fulfilled, fulfilledReducer);
   rejectedReducer && builder.addCase(thunk.rejected, rejectedReducer);
