@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import styles from './ContestCreationPage.module.sass';
@@ -8,7 +8,7 @@ import ContestForm from '../../components/ContestForm/ContestForm';
 import BackButton from '../../components/BackButton/BackButton';
 import ProgressBar from '../../components/ProgressBar/ProgressBar';
 
-const ContestCreationPage = props => {
+const ContestCreationPage = (props) => {
   const formRef = useRef();
   const navigate = useNavigate();
 
@@ -16,8 +16,19 @@ const ContestCreationPage = props => {
     ? props.contestCreationStore.contests[props.contestType]
     : { contestType: props.contestType };
 
-  const handleSubmit = values => {
-    props.saveContest({ type: props.contestType, info: values });
+  useEffect(() => {
+    if (!props.bundleStore.bundle) {
+      navigate('/startContest', { replace: true });
+    }
+  }, [props.bundleStore.bundle, navigate]);
+
+  const handleSubmit = (values) => {
+    const { file, ...rest } = values;
+    props.saveContest({
+      type: props.contestType,
+      info: { ...rest, fileName: file?.name || null },
+    });
+    
     const route =
       props.bundleStore.bundle[props.contestType] === 'payment'
         ? '/payment'
@@ -31,7 +42,7 @@ const ContestCreationPage = props => {
     }
   };
 
-  !props.bundleStore.bundle && navigate('/startContest', { replace: true });
+  // !props.bundleStore.bundle && navigate('/startContest', { replace: true });
 
   return (
     <div>
@@ -67,13 +78,13 @@ const ContestCreationPage = props => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   const { contestCreationStore, bundleStore } = state;
   return { contestCreationStore, bundleStore };
 };
 
-const mapDispatchToProps = dispatch => ({
-  saveContest: data => dispatch(saveContestToStore(data)),
+const mapDispatchToProps = (dispatch) => ({
+  saveContest: (data) => dispatch(saveContestToStore(data)),
 });
 
 export default connect(
