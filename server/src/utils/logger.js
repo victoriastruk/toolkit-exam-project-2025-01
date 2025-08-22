@@ -1,5 +1,9 @@
 const fs = require('fs');
-const { LOG_FILE_PATH } = require('../constants');
+const { LOG_DIR_PATH, LOG_FILE_PATH } = require('../constants');
+
+if (!fs.existsSync(LOG_DIR_PATH)) {
+  fs.mkdirSync(LOG_DIR_PATH, { recursive: true });
+}
 
 function logError(error) {
   const logEntry = {
