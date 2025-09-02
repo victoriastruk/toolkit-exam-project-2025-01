@@ -172,7 +172,7 @@ class ContestForm extends React.Component {
                 />
               )}
               <OptionalSelects {...this.props} />
-              {this.props.contestType !== CONSTANTS.NAME_CONTEST && (
+              {this.props.contestType === CONSTANTS.LOGO_CONTEST && (
               <FieldFileInput
                 name='file'
                 classes={{

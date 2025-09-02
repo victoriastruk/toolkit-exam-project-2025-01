@@ -45,8 +45,8 @@ module.exports.contestSchem = yup.object().shape({
     .string()
     .matches(/(name|logo|tagline)/)
     .required(),
-  fileName: yup.string().min(1),
-  originalFileName: yup.string().min(1),
+  fileName: yup.string().min(1).nullable(),
+  originalFileName: yup.string().min(1).nullable(),
   title: yup
     .string()
     .required()
