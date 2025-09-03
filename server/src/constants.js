@@ -30,6 +30,7 @@ module.exports = {
   NOTIFICATION_CHANGE_OFFER_STATUS: 'changeOfferStatus',
   NEW_MESSAGE: 'newMessage',
   CHANGE_BLOCK_STATUS: 'CHANGE_BLOCK_STATUS',
+  LOG_DIR_PATH: path.join(__dirname, 'logs'),
   LOG_FILE_PATH: path.join(__dirname, 'logs', 'errors.log'),
   BACKUP_DIR_PATH: path.join(__dirname, 'backup'),
 };

@@ -172,6 +172,7 @@ class ContestForm extends React.Component {
                 />
               )}
               <OptionalSelects {...this.props} />
+              {this.props.contestType === CONSTANTS.LOGO_CONTEST && (
               <FieldFileInput
                 name='file'
                 classes={{
@@ -183,6 +184,7 @@ class ContestForm extends React.Component {
                 }}
                 type='file'
               />
+              )}
               {this.props.isEditContest ? (
                 <button type='submit' className={styles.changeData}>
                   Set Data

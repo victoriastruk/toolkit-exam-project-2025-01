@@ -20,28 +20,32 @@ function transformLogLine(line) {
 }
 
 function dailyBackup() {
-  if (!fs.existsSync(LOG_FILE_PATH)) return;
+  try {
+    if (!fs.existsSync(LOG_FILE_PATH)) return;
 
-  const lines = fs
-    .readFileSync(LOG_FILE_PATH, 'utf-8')
-    .split('\n')
-    .filter(Boolean);
-  const transformed = lines.map(transformLogLine).filter(Boolean);
+    const lines = fs
+      .readFileSync(LOG_FILE_PATH, 'utf-8')
+      .split('\n')
+      .filter(Boolean);
+    const transformed = lines.map(transformLogLine).filter(Boolean);
 
-  if (transformed.length === 0) return;
+    if (transformed.length === 0) return;
 
-  const timestamp = Date.now();
-  const backupFilePath = path.join(BACKUP_DIR_PATH, `errors_${timestamp}.log`);
+    const timestamp = Date.now();
+    const backupFilePath = path.join(BACKUP_DIR_PATH, `errors_${timestamp}.log`);
 
-  fs.writeFileSync(
-    backupFilePath,
-    transformed.map(JSON.stringify).join('\n'),
-    'utf-8',
-  );
+    fs.writeFileSync(
+      backupFilePath,
+      transformed.map(JSON.stringify).join('\n'),
+      'utf-8',
+    );
 
-  fs.writeFileSync(LOG_FILE_PATH, '', 'utf-8');
+    fs.truncateSync(LOG_FILE_PATH, 0);
 
-  console.log(`Backup created: ${backupFilePath}`);
+    console.log(`Backup created: ${backupFilePath}`);
+  } catch (err) {
+    console.error('Backup failed:', err);
+  }
 }
 
 module.exports = { dailyBackup };

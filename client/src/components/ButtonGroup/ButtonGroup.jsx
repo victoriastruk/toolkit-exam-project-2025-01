@@ -8,14 +8,15 @@ const ButtonGroup = ({ name, question, options }) => {
       <p className={styles.question}>{question}</p>
       <div className={styles.groupValues}>
         {options.map(({ value, label, description, recommended }) => (
-          <ButtonOption
-            key={value}
-            name={name}
-            value={value}
-            label={label}
-            description={description}
-            recommended={recommended}
-          />
+          <div key={value} className={styles.label}>
+            <ButtonOption
+              name={name}
+              value={value}
+              label={label}
+              description={description}
+              recommended={recommended}
+            />
+          </div>
         ))}
       </div>
     </>

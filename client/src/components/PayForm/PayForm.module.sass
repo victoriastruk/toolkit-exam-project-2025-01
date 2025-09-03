@@ -25,12 +25,16 @@
 
   .buttonsContainer
     display: flex
-    flex-direction: row
     align-items: center
-    justify-content: flex-start
+    gap: 10px
+    justify-content: center
     padding: 0 15px
     margin-bottom: 25px
     margin-top: 20px
+    width: 100%
+
+    .payButton, .backButton
+      flex: 1 1 0   
 
     .payButton
       font-size: 20px
@@ -42,6 +46,8 @@
       color: white
       border: 1px solid transparent
       border-radius: 4px
+      &:hover
+        background: #e46a3a
       @media(max-width: 480px)
         padding: 8px 30px
 
@@ -49,12 +55,14 @@
       background-color: #ababac
       font-size: 20px
       padding: 8px 50px
+      cursor: pointer
       line-height: 1.4
       text-align: center
       border: 1px solid transparent
       border-radius: 4px
       color: white
-      margin-left: 10px
+      &:hover
+        background: #7d7d7e
       @media(max-width: 480px)
         padding: 8px 30px
 

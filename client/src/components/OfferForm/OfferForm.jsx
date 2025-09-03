@@ -74,14 +74,15 @@ const OfferForm = props => {
         }}
         validationSchema={validationSchema}
       >
-        <Form className={styles.form}>
+      {({isValid}) => ( <Form className={styles.form}>
           {renderOfferInput()}
-          {valid && (
+          {isValid && (
             <button type='submit' className={styles.btnOffer}>
               Send Offer
             </button>
           )}
         </Form>
+      )}
       </Formik>
     </div>
   );
