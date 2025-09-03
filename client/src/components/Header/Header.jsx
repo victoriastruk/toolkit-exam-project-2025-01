@@ -25,6 +25,10 @@ const Header = ({ data, isFetching, getUser, clearUserStore }) => {
     navigate('/startContest');
   };
 
+  const viewOffers = () => {
+    navigate('/offers'); 
+  };
+
   if (isFetching) return null;
 
   return (
@@ -37,7 +41,7 @@ const Header = ({ data, isFetching, getUser, clearUserStore }) => {
         <a href="http://www.google.com">Read Announcement</a>
       </div>
       <HeaderTop userData={data} onLogout={logOut} />
-      <HeaderNavigation data={data} startContests={startContests} />
+      <HeaderNavigation data={data} startContests={startContests} viewOffers={viewOffers}/>
     </div>
   );
 };

@@ -22,6 +22,7 @@ import OnlyNotAuthorizedUserRoute from './components/Routes/OnlyNotAuthorizedUse
 import PrivateRoute from './components/Routes/PrivateRoute/PrivateRoute';
 import EventsPage from './pages/EventsPage/EventsPage';
 import HowItWorksPage from './pages/HowItWorksPage/HowItWorksPage';
+import ReviewOffersPage from './pages/ReviewOffersPage/ReviewOffersPage';
 
 function App() {
   return (
@@ -77,6 +78,11 @@ function App() {
                 />
               }
             />
+            
+            <Route element={<PrivateRoute roles={[CONSTANTS.MODERATOR]}/>}>
+            <Route path='/offers' element={<ReviewOffersPage/>}/>
+            </Route>
+
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/contest/:id' element={<ContestPage />} />
             <Route path='/account' element={<UserProfile />} />

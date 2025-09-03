@@ -42,6 +42,19 @@ module.exports.dataForContest = async (req, res, next) => {
 
 module.exports.getContestById = async (req, res, next) => {
   try {
+
+    let offerWhere = {};
+
+    if (req.tokenData.role === CONSTANTS.CREATOR) {
+      offerWhere = { userId: req.tokenData.userId };
+    } else if (req.tokenData.role === CONSTANTS.CUSTOMER) {
+      offerWhere = {
+        status: [
+          CONSTANTS.OFFER_STATUS_MODERATOR_APPROVED,
+        ],
+      };
+    }
+
     let contestInfo = await db.Contests.findOne({
       where: { id: req.headers.contestid },
       order: [[db.Offers, 'id', 'asc']],
@@ -56,10 +69,7 @@ module.exports.getContestById = async (req, res, next) => {
         {
           model: db.Offers,
           required: false,
-          where:
-            req.tokenData.role === CONSTANTS.CREATOR
-              ? { userId: req.tokenData.userId }
-              : {},
+          where: offerWhere,
           attributes: { exclude: ['userId', 'contestId'] },
           include: [
             {
@@ -312,4 +322,58 @@ module.exports.getContests = (req, res, next) => {
     .catch(err => {
       next(new ServerError());
     });
+};
+
+module.exports.getOffers = async (req, res, next) => {
+  try{
+    if (req.tokenData.role !== CONSTANTS.MODERATOR) {
+      return res.status(403).send({ message: 'Access denied' });
+    }
+    const limit = parseInt(req.query.limit) || 5;
+    const offset = parseInt(req.query.offset) || 0;
+    const offers = await db.Offers.findAll({
+      limit,
+      offset,
+      attributes: {
+        exclude: ['userId'],
+      },
+      include: [{
+        model: db.Contests,
+        attributes: {
+          exclude: ['userId', 'orderId', 'status', 'prize'],
+        },
+      }],
+      order: [['id', 'DESC']],
+    });
+
+    const haveMore = offers.length === limit;
+
+    return res.status(200).send({ offers, haveMore });
+
+  }catch(e){
+    return next(new ServerError());
+  }
+};
+
+module.exports.moderateOffer = async (req, res, next) => {
+  try{
+    const { offerId, command } = req.body;
+
+    let newStatus;
+    if(command === 'approve') newStatus = CONSTANTS.OFFER_STATUS_MODERATOR_APPROVED;
+    if(command === 'reject') newStatus = CONSTANTS.OFFER_STATUS_MODERATOR_REJECTED;
+
+    const [_, [updatedOffer]] = await db.Offers.update(
+      { status: newStatus },
+      { where: { id: offerId }, returning: true },
+    );
+
+    if (!updatedOffer) {
+      return next(new ServerError('Offer not found or not updated'));
+    }
+
+    res.send(updatedOffer);
+  }catch(e){
+    return next(new ServerError());
+  }
 };

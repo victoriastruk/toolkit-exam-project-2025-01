@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const { CUSTOMER, CREATOR, SALT_ROUNDS } = require('../constants');
+const { CUSTOMER, CREATOR, SALT_ROUNDS, MODERATOR } = require('../constants');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -19,6 +19,14 @@ module.exports = {
         password: bcrypt.hashSync('12343456', SALT_ROUNDS),
         email: 'creative@gmail.com',
         role: CREATOR,
+      },
+      {
+        firstName: 'moderatorfn',
+        lastName: 'moderatorln',
+        displayName: 'moderatordn',
+        password: bcrypt.hashSync('12343456', SALT_ROUNDS),
+        email: 'moderator@gmail.com',
+        role: MODERATOR,
       },
     ]);
   },

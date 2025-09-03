@@ -72,6 +72,52 @@ const addOfferExtraReducers = createExtraReducers({
   },
 });
 
+//----------getOffers
+export const getOffers = decorateAsyncThunk({
+  key: 'offers/getOffers',
+  thunk: async (payload) => {
+    const { data } = await restController.getOffers(payload);
+    return data;
+  },
+});
+
+const getOffersExtraReducers = createExtraReducers({
+  thunk: getOffers,
+  pendingReducer: (state) => {
+    state.isFetching = true;
+    state.error = null;
+  },
+  fulfilledReducer: (state, { payload }) => {
+    (state.isFetching = false), (state.offers = payload.offers);
+    state.haveMore = payload.haveMore;
+    state.error = null;
+  },
+  rejectedReducer,
+});
+
+// ---------- moderateOffer 
+export const moderateOffer = decorateAsyncThunk({
+  key: 'moderator/moderateOffer',
+  thunk: async ({ command, offerId, contestId }) => {
+    const { data } = await restController.moderateOffer({
+      command,
+      offerId,
+    });
+    return data; 
+  },
+});
+
+const moderateOfferExtraReducers = createExtraReducers({
+  thunk: moderateOffer,
+  fulfilledReducer: (state, { payload }) => {
+    const updatedOffer = payload;
+    state.offers = state.offers.map((o) =>
+      o.id === updatedOffer.id ? { ...o, status: updatedOffer.status } : o
+    );
+  },
+  rejectedReducer,
+});
+
 // ---------- setOfferStatus
 export const setOfferStatus = decorateAsyncThunk({
   key: `${CONTEST_BY_ID_SLICE_NAME}/setOfferStatus`,
@@ -86,9 +132,10 @@ const setOfferStatusExtraReducers = createExtraReducers({
   fulfilledReducer: (state, { payload }) => {
     state.offers.forEach((offer) => {
       if (payload.status === CONSTANTS.OFFER_STATUS_WON) {
-        offer.status = payload.id === offer.id
-          ? CONSTANTS.OFFER_STATUS_WON
-          : CONSTANTS.OFFER_STATUS_REJECTED;
+        offer.status =
+          payload.id === offer.id
+            ? CONSTANTS.OFFER_STATUS_WON
+            : CONSTANTS.OFFER_STATUS_REJECTED;
       } else if (payload.id === offer.id) {
         offer.status = CONSTANTS.OFFER_STATUS_REJECTED;
       }
@@ -162,6 +209,8 @@ const extraReducers = (builder) => {
   addOfferExtraReducers(builder);
   setOfferStatusExtraReducers(builder);
   changeMarkExtraReducers(builder);
+  getOffersExtraReducers(builder);
+  moderateOfferExtraReducers(builder);
 };
 
 const contestByIdSlice = createSlice({

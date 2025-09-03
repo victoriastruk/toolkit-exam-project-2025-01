@@ -196,7 +196,7 @@ const OfferBox = props => {
             />
           )}
         </div>
-        {role !== CONSTANTS.CREATOR && (
+        {role === CONSTANTS.CUSTOMER && (
           <i onClick={goChat} className='fas fa-comments' />
         )}
       </div>

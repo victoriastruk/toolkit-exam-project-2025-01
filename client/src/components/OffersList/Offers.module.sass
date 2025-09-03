@@ -1,0 +1,76 @@
+.offersWrapper
+   max-width: 800px
+   width: 100%
+   
+.wrapperItem
+   display: flex
+   max-width: 1200px
+   width: 100%
+   margin-top: 15px
+   align-self: stretch
+   padding: 30px 40px 10px 40px
+   background-color: #f9fafb
+   flex-direction: column
+   justify-content: flex-start
+   border-radius: 10px
+   position: relative
+   align-items: center
+   border: 1px solid grey
+   @media(max-width: 450px)
+     padding: 10px 0
+   .wrapperInfo
+      display: flex
+      align-items: center
+      align-self: stretch
+      justify-content: space-around
+
+   i
+    position: absolute
+    left: calc(100% - 35px)
+    top: -15px
+    font-size: 54px
+
+   .reject
+    color: red
+
+   .resolve
+    color: green
+
+
+.btnsContainer
+   margin: 5px 0
+   align-self: stretch
+   display: flex
+   flex-direction: row
+   align-items: center
+   justify-content: space-around
+
+   .resolveBtn
+      width: 100px
+      cursor: pointer
+      text-align: center
+      padding: 10px
+      border-radius: 8px
+      background-color: #8aca6b
+      color: white
+      border: none
+
+      &:hover
+         background-color: rgba(138, 202, 107, 0.7)
+
+   .rejectBtn
+      text-align: center
+      cursor: pointer
+      width: 100px
+      padding: 10px
+      border-radius: 8px
+      background-color: #CD5C5C
+      color: white
+      margin: 0 25px
+      border: none 
+
+      &:hover
+         background-color: rgba(205, 92, 92, 0.7)
+
+.wrapperInfo
+   display: flex

@@ -4,7 +4,7 @@ import menuData from './menu.json';
 import styles from './HeaderNavigation.module.sass';
 import CONSTANTS from '../../../constants';
 
-const HeaderNavigation = ({ data, startContests }) => {
+const HeaderNavigation = ({ data, startContests, viewOffers }) => {
   return (
     <div className={styles.navContainer}>
       <div className={styles.container}>
@@ -17,9 +17,15 @@ const HeaderNavigation = ({ data, startContests }) => {
             ))}
           </ul>
   
-        {data && data.role !== CONSTANTS.CREATOR && (
+        {data && data.role === CONSTANTS.CUSTOMER && (
           <div className={styles.startContestBtn} onClick={startContests}>
             START CONTEST
+          </div>
+        )}
+
+         {data && data.role === CONSTANTS.MODERATOR && (
+          <div className={styles.startContestBtn} onClick={viewOffers}>
+            REVIEW OFFERS
           </div>
         )}
       </div>

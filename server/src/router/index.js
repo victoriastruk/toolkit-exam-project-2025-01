@@ -84,6 +84,20 @@ router.post(
   contestController.setOfferStatus,
 );
 
+router.get(
+  '/offers',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  contestController.getOffers,
+);
+
+router.post(
+  '/moderateOffer',
+  checkToken.checkToken,
+  basicMiddlewares.onlyForModerator,
+  contestController.moderateOffer,
+);
+
 router.post(
   '/changeMark',
   checkToken.checkToken,
