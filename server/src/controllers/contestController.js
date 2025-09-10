@@ -149,21 +149,6 @@ module.exports.setNewOffer = async (req, res, next) => {
   }
 };
 
-const rejectOffer = async (offerId, creatorId, contestId) => {
-  const rejectedOffer = await contestQueries.updateOffer(
-    { status: CONSTANTS.OFFER_STATUS_REJECTED },
-    { id: offerId },
-  );
-  controller
-    .getNotificationController()
-    .emitChangeOfferStatus(
-      creatorId,
-      'Someone of yours offers was rejected',
-      contestId,
-    );
-  return rejectedOffer;
-};
-
 const resolveOffer = async (
   contestId,
   creatorId,
@@ -188,11 +173,13 @@ const resolveOffer = async (
     { orderId },
     transaction,
   );
+
   await userQueries.updateUser(
     { balance: db.sequelize.literal('balance + ' + finishedContest.prize) },
     creatorId,
     transaction,
   );
+
   const updatedOffers = await contestQueries.updateOfferStatus(
     {
       status: db.sequelize.literal(` CASE
@@ -201,43 +188,55 @@ const resolveOffer = async (
             END
     `),
     },
-    {
-      contestId,
-    },
+    { contestId },
     transaction,
   );
-  transaction.commit();
-  const arrayRoomsId = [];
-  updatedOffers.forEach(offer => {
-    if (
-      offer.status === CONSTANTS.OFFER_STATUS_REJECTED &&
-      creatorId !== offer.userId
-    ) {
-      arrayRoomsId.push(offer.userId);
-    }
-  });
+
+  await transaction.commit();
+
+  const rejectedUserIds = updatedOffers
+    .filter(offer => offer.status === CONSTANTS.OFFER_STATUS_REJECTED && creatorId !== offer.userId)
+    .map(offer => offer.userId);
+
+  if (rejectedUserIds.length > 0) {
+    controller
+      .getNotificationController()
+      .emitChangeOfferStatus(
+        rejectedUserIds,
+        'Someone of your offers was rejected',
+        contestId,
+      );
+  }
+
   controller
     .getNotificationController()
     .emitChangeOfferStatus(
-      arrayRoomsId,
-      'Someone of yours offers was rejected',
+      creatorId,
+      'Congratulations! Your offer WON',
       contestId,
     );
-  controller
-    .getNotificationController()
-    .emitChangeOfferStatus(creatorId, 'Someone of your offers WIN', contestId);
-  return updatedOffers[0].dataValues;
+
+  return updatedOffers.find(o => o.id === offerId).dataValues;
 };
 
 module.exports.setOfferStatus = async (req, res, next) => {
   let transaction;
   if (req.body.command === 'reject') {
     try {
-      const offer = await rejectOffer(
-        req.body.offerId,
-        req.body.creatorId,
-        req.body.contestId,
+      const [ _, [offer]] = await db.Offers.update(
+        { status: CONSTANTS.OFFER_STATUS_REJECTED },
+        { where: { id: req.body.offerId }, returning: true },
       );
+
+      if(!offer) return next(new ServerError('Offer not found'));
+
+      controller
+        .getNotificationController()
+        .emitChangeOfferStatus(
+          req.body.creatorId,
+          'Someone of yours offers was rejected',
+          req.body.contestId,
+        );
       res.send(offer);
     } catch (err) {
       next(err);
@@ -371,7 +370,13 @@ module.exports.moderateOffer = async (req, res, next) => {
     if (!updatedOffer) {
       return next(new ServerError('Offer not found or not updated'));
     }
-
+    controller
+      .getNotificationController()
+      .emitChangeOfferStatus(
+        updatedOffer.userId,
+        `Your offer was ${command} by moderator`,
+        updatedOffer.contestId,
+      );
     res.send(updatedOffer);
   }catch(e){
     return next(new ServerError());
