@@ -1,3 +1,12 @@
+const {
+  OFFER_STATUS_PENDING,
+  OFFER_STATUS_REJECTED,
+  OFFER_STATUS_WON,
+  OFFER_STATUS_MODERATOR_APPROVED,
+  OFFER_STATUS_MODERATOR_REJECTED,
+  OFFER_STATUS_MODERATOR_PENDING,
+} = require('../constants');
+
 module.exports = (sequelize, DataTypes) => {
   const Offer = sequelize.define(
     'Offers',
@@ -28,10 +37,23 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      status: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        defaultValue: 'pending',
+      customerStatus: {
+        type: DataTypes.ENUM(
+          OFFER_STATUS_PENDING,
+          OFFER_STATUS_WON,
+          OFFER_STATUS_REJECTED,
+        ),
+        allowNull: false,
+        defaultValue: OFFER_STATUS_PENDING,
+      },
+      moderatorStatus: {
+        type: DataTypes.ENUM(
+          OFFER_STATUS_MODERATOR_PENDING,
+          OFFER_STATUS_MODERATOR_APPROVED,
+          OFFER_STATUS_MODERATOR_REJECTED,
+        ),
+        allowNull: false,
+        defaultValue: OFFER_STATUS_MODERATOR_PENDING,
       },
     },
     {

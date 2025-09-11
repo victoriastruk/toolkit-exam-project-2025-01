@@ -1,3 +1,5 @@
+const { NAME_CONTEST, LOGO_CONTEST, TAGLINE_CONTEST } = require('../constants');
+
 module.exports = (sequelize, DataTypes) => {
   const Contest = sequelize.define(
     'Contests',
@@ -22,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       contestType: {
         allowNull: false,
-        type: DataTypes.ENUM('name', 'tagline', 'logo'),
+        type: DataTypes.ENUM(NAME_CONTEST, TAGLINE_CONTEST, LOGO_CONTEST),
       },
       fileName: {
         allowNull: true,
