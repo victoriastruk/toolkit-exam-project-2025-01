@@ -1,3 +1,5 @@
+const { NAME_CONTEST, LOGO_CONTEST, TAGLINE_CONTEST } = require('../constants');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Contests', {
@@ -9,7 +11,7 @@ module.exports = {
       },
       contestType: {
         allowNull: false,
-        type: Sequelize.ENUM('name', 'tagline', 'logo'),
+        type: Sequelize.ENUM(NAME_CONTEST, TAGLINE_CONTEST, LOGO_CONTEST),
       },
       fileName: {
         allowNull: true,

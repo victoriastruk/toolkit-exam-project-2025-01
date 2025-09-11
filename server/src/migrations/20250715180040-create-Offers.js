@@ -1,3 +1,12 @@
+const {
+  OFFER_STATUS_MODERATOR_PENDING,
+  OFFER_STATUS_MODERATOR_APPROVED,
+  OFFER_STATUS_MODERATOR_REJECTED,
+  OFFER_STATUS_PENDING,
+  OFFER_STATUS_WON,
+  OFFER_STATUS_REJECTED,
+} = require('../constants');
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('Offers', {
@@ -35,10 +44,23 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      status: {
-        type: Sequelize.STRING,
-        allowNull: true,
-        defaultValue: 'pending',
+      customerStatus: {
+        type: Sequelize.ENUM(
+          OFFER_STATUS_PENDING,
+          OFFER_STATUS_REJECTED,
+          OFFER_STATUS_WON,
+        ),
+        allowNull: false,
+        defaultValue: OFFER_STATUS_PENDING,
+      },
+      moderatorStatus: {
+        type: Sequelize.ENUM(
+          OFFER_STATUS_MODERATOR_APPROVED,
+          OFFER_STATUS_MODERATOR_REJECTED,
+          OFFER_STATUS_MODERATOR_PENDING,
+        ),
+        allowNull: false,
+        defaultValue: OFFER_STATUS_MODERATOR_PENDING,
       },
     });
   },
