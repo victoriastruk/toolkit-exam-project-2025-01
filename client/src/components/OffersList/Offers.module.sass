@@ -1,76 +1,90 @@
 .offersWrapper
-   max-width: 800px
-   width: 100%
-   
+  width: 100%
+  max-width: 800px 
+  margin: 0 auto
+  display: flex
+  flex-direction: column
+  gap: 15px
+
 .wrapperItem
-   display: flex
-   max-width: 1200px
-   width: 100%
-   margin-top: 15px
-   align-self: stretch
-   padding: 30px 40px 10px 40px
-   background-color: #f9fafb
-   flex-direction: column
-   justify-content: flex-start
-   border-radius: 10px
-   position: relative
-   align-items: center
-   border: 1px solid grey
-   @media(max-width: 450px)
-     padding: 10px 0
-   .wrapperInfo
-      display: flex
-      align-items: center
-      align-self: stretch
-      justify-content: space-around
-
-   i
-    position: absolute
-    left: calc(100% - 35px)
-    top: -15px
-    font-size: 54px
-
-   .reject
-    color: red
-
-   .resolve
-    color: green
-
-
-.btnsContainer
-   margin: 5px 0
-   align-self: stretch
-   display: flex
-   flex-direction: row
-   align-items: center
-   justify-content: space-around
-
-   .resolveBtn
-      width: 100px
-      cursor: pointer
-      text-align: center
-      padding: 10px
-      border-radius: 8px
-      background-color: #8aca6b
-      color: white
-      border: none
-
-      &:hover
-         background-color: rgba(138, 202, 107, 0.7)
-
-   .rejectBtn
-      text-align: center
-      cursor: pointer
-      width: 100px
-      padding: 10px
-      border-radius: 8px
-      background-color: #CD5C5C
-      color: white
-      margin: 0 25px
-      border: none 
-
-      &:hover
-         background-color: rgba(205, 92, 92, 0.7)
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  max-width: 1200px
+  width: 100%
+  margin-top: 15px
+  padding: 25px 35px
+  background-color: #f9fafb
+  color: #556da5
+  position: relative
 
 .wrapperInfo
-   display: flex
+  display: flex
+  justify-content: space-between
+  gap: 20px
+  flex-wrap: wrap
+
+.contestInfo
+  display: flex
+  flex-direction: column
+  flex: 1
+  min-width: 200px
+  p
+    margin: 5px 0
+    strong
+      color: #455a89
+
+.offerContent
+  display: flex
+  flex-direction: column
+  align-items: center
+  flex: 1
+  min-width: 200px
+  gap: 10px
+  p
+    margin: 5px 0
+  .img
+    width: 150px
+    height: 100px
+    object-fit: cover
+    border-radius: 5px
+
+.btnsContainer
+  display: flex
+  justify-content: flex-end
+  gap: 15px
+  margin-top: 15px
+
+.resolveBtn, .rejectBtn
+  width: 100px
+  padding: 10px
+  border-radius: 8px
+  color: #fff
+  border: none
+  cursor: pointer
+  text-align: center
+  transition: background-color 0.3s
+
+.resolveBtn
+  background-color: #8aca6b
+  &:hover
+    background-color: rgba(138,202,107,0.7)
+
+.rejectBtn
+  background-color: #CD5C5C
+  &:hover
+    background-color: rgba(205,92,92,0.7)
+
+.reject
+  color: red
+  position: absolute
+  right: 20px
+  top: 20px
+  font-size: 36px
+
+.resolve
+  color: green
+  position: absolute
+  right: 20px
+  top: 20px
+  font-size: 36px

@@ -88,8 +88,9 @@ const getOffersExtraReducers = createExtraReducers({
     state.error = null;
   },
   fulfilledReducer: (state, { payload }) => {
-    (state.isFetching = false), (state.offers = payload.offers);
-    state.haveMore = payload.haveMore;
+    state.isFetching = false;
+    state.offers = payload.offers;
+    state.totalCount = payload.totalCount;
     state.error = null;
   },
   rejectedReducer,
@@ -110,11 +111,12 @@ export const moderateOffer = decorateAsyncThunk({
 const moderateOfferExtraReducers = createExtraReducers({
   thunk: moderateOffer,
   fulfilledReducer: (state, { payload }) => {
-    const updatedOffer = payload;
-    state.offers = state.offers.map((o) =>
-      o.id === updatedOffer.id ? { ...o, status: updatedOffer.status } : o
-    );
-  },
+  state.offers = state.offers.map((offer) =>
+    offer.id === payload.id
+      ? { ...offer, moderatorStatus: payload.moderatorStatus }
+      : offer
+  );
+},
   rejectedReducer,
 });
 
@@ -130,18 +132,26 @@ export const setOfferStatus = decorateAsyncThunk({
 const setOfferStatusExtraReducers = createExtraReducers({
   thunk: setOfferStatus,
   fulfilledReducer: (state, { payload }) => {
-    state.offers.forEach((offer) => {
-      if (payload.status === CONSTANTS.OFFER_STATUS_WON) {
-        offer.status =
-          payload.id === offer.id
+  const { id: winningOfferId, customerStatus: payloadStatus } = payload;
+
+  state.offers = state.offers.map((offer) => {
+    if (payloadStatus === CONSTANTS.OFFER_STATUS_WON) {
+      return {
+        ...offer,
+        customerStatus:
+          offer.id === winningOfferId
             ? CONSTANTS.OFFER_STATUS_WON
-            : CONSTANTS.OFFER_STATUS_REJECTED;
-      } else if (payload.id === offer.id) {
-        offer.status = CONSTANTS.OFFER_STATUS_REJECTED;
-      }
-    });
-    state.error = null;
-  },
+            : CONSTANTS.OFFER_STATUS_REJECTED,
+      };
+    }
+    if (offer.id === winningOfferId) {
+      return { ...offer, customerStatus: CONSTANTS.OFFER_STATUS_REJECTED };
+    }
+    return offer;
+  });
+
+  state.setOfferStatusError = null;
+},
   rejectedReducer: (state, { payload }) => {
     state.setOfferStatusError = payload;
   },

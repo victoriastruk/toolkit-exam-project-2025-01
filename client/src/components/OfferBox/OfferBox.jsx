@@ -81,15 +81,22 @@ const OfferBox = props => {
   };
 
   const offerStatus = () => {
-    const { status } = props.data;
-    if (status === CONSTANTS.OFFER_STATUS_REJECTED) {
+    const { customerStatus, moderatorStatus } = props.data;
+     if (moderatorStatus === CONSTANTS.OFFER_STATUS_MODERATOR_REJECTED) {
+    return (
+      <i
+        className={classNames('fas fa-times-circle reject', styles.reject)}
+      />
+    );
+  }
+    if (customerStatus === CONSTANTS.OFFER_STATUS_REJECTED) {
       return (
         <i
           className={classNames('fas fa-times-circle reject', styles.reject)}
         />
       );
     }
-    if (status === CONSTANTS.OFFER_STATUS_WON) {
+    if (customerStatus === CONSTANTS.OFFER_STATUS_WON) {
       return (
         <i
           className={classNames('fas fa-check-circle resolve', styles.resolve)}
@@ -200,7 +207,7 @@ const OfferBox = props => {
           <i onClick={goChat} className='fas fa-comments' />
         )}
       </div>
-      {props.needButtons(data.status) && (
+      {props.needButtons(data.customerStatus, data.moderatorStatus) && (
         <div className={styles.btnsContainer}>
           <div onClick={resolveOffer} className={styles.resolveBtn}>
             Resolve

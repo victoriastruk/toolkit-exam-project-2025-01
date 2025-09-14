@@ -13,7 +13,6 @@ import {
   changeContestViewMode,
   changeShowImage,
 } from '../../store/slices/contestByIdSlice';
-import Header from '../../components/Header/Header';
 import ContestSideBar from '../../components/ContestSideBar/ContestSideBar';
 import styles from './ContestPage.module.sass';
 import OfferBox from '../../components/OfferBox/OfferBox';
@@ -62,14 +61,15 @@ class ContestPage extends React.Component {
     );
   };
 
-  needButtons = offerStatus => {
+  needButtons = ( customerStatus, moderatorStatus ) => {
     const contestCreatorId = this.props.contestByIdStore.contestData.User.id;
     const userId = this.props.userStore.data.id;
     const contestStatus = this.props.contestByIdStore.contestData.status;
     return (
       contestCreatorId === userId &&
       contestStatus === CONSTANTS.CONTEST_STATUS_ACTIVE &&
-      offerStatus === CONSTANTS.OFFER_STATUS_MODERATOR_APPROVED
+      moderatorStatus === CONSTANTS.OFFER_STATUS_MODERATOR_APPROVED &&
+      customerStatus === CONSTANTS.OFFER_STATUS_PENDING
     );
   };
 
